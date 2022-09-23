@@ -1,7 +1,7 @@
 'use strict';
 
-import { adsController } from "./adsList/adsController.js";
+import { AdsController } from "./adsList/AdsController.js";
 
 document.addEventListener('DOMContentLoaded',()=>{
-  adsController(document.querySelector('#advertisements'));
+  const advertisements=new AdsController(document.querySelector('#advertisements'));
 });

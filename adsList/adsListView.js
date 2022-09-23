@@ -7,7 +7,7 @@
  * @param {Object} advertisement
  * @returns string HTML advertisement formatted
  */
-export function adViewBuilder(ad){
+export function adsListViewBuilder(ad){
   let adView=`
     <p>Autor: ${ad.handler}</p>
     <p>Artículo: ${ad.name}</p>
@@ -18,4 +18,24 @@ export function adViewBuilder(ad){
   ad.shell===true ? adView+=`<p>Precio: ${ad.price}</p>`: adView+=`<p>Presupuesto: ${ad.price}</p>`;
 
   return adView;
+}
+
+export function adsNotFoundBuilder(){
+  let adNotFound=`
+    <h2>No se han encontrado anuncios</h2>
+  `;
+  return adNotFound;
+}
+
+export function spinnerBuild(){
+  let spinner=`
+    <div class="spinner">
+      <div></div>
+      <div></div><div></div><div></div>
+      <div></div><div></div><div></div>
+      <div></div>
+    </div>
+  `;
+
+  return spinner;
 }

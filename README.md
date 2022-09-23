@@ -3,7 +3,7 @@ Práctica para módulo frontend JS de FullStack Web13 Keepcoding. Copia de walla
 
 
 ## Requisitos mínimos
-- Listado de alumnos
+- Listado de anuncios
   - Imagen
   - Nombre
   - Descripción (reducida)
@@ -16,7 +16,7 @@ Práctica para módulo frontend JS de FullStack Web13 Keepcoding. Copia de walla
   - Enviar a detallas de anuncios al hacer click
   - Si el usuario está loggeado aparecer botón de crear anuncio
 - Detalle de anuncio
-  - Los mismos detalles pero completo.
+  - Los mismos detalles pero completo. --> DONE
   - Si el producto es del dueño, y está loggeado debe mostrar botón que permita eliminar anuncio, con confirmación previa
 - Creación de anuncio
   - Sólo si el usuario ha hecho login
