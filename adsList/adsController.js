@@ -1,6 +1,6 @@
 'use strict';
 
-import { adsModel } from "./adsModel.js";
+import { adsModel } from "./adsProvider.js";
 import { adViewBuilder } from "./adsView.js";
 
 export async function adsController(parentNode){
