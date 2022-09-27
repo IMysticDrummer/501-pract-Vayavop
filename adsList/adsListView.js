@@ -18,15 +18,23 @@ export function adsListViewBuilder(ad){
   ad.shell===true ? adView+=`<p>Precio: ${ad.price}</p>`: adView+=`<p>Presupuesto: ${ad.price}</p>`;
 
   return adView;
-}
+};
 
+/**
+ * 
+ * @returns string html formatted containing "no se han encotrado anuncios"
+ */
 export function adsNotFoundBuilder(){
   let adNotFound=`
     <h2>No se han encontrado anuncios</h2>
   `;
   return adNotFound;
-}
+};
 
+/**
+ * 
+ * @returns string html formmated to manage a spinner
+ */
 export function spinnerBuild(){
   let spinner=`
     <div class="spinner">
@@ -38,4 +46,4 @@ export function spinnerBuild(){
   `;
 
   return spinner;
-}
+};

@@ -2,6 +2,7 @@
 
 import { getAds } from "./adsProvider.js";
 import { adsListViewBuilder, adsNotFoundBuilder, spinnerBuild } from "./adsListView.js";
+import { pubSub } from "../pubSub.js";
 
 export class AdsController {
 
@@ -11,14 +12,16 @@ export class AdsController {
   };
 
   async loadAds(){
+    //spinner
     const spinner=this.drawSpinner();
-    let ads;
 
-    //Get advertisements
+    //getting advertisements and quit spinner
+    let ads;
     try {
       ads=await getAds();
     } catch (error) {
-      alert(error);
+      //pubsub to notify
+      pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, error);
     }
     spinner.classList.toggle('hide');
 
@@ -28,7 +31,7 @@ export class AdsController {
   };
   
   /**
-   * Show "Advertisements not found" advise
+   * Show *Advertisements not found* advise
    */
   showAdsNotFound(){
     const divElement=document.createElement('div');
@@ -38,7 +41,7 @@ export class AdsController {
   };
 
   /**
-   * Draw the advertisement list received
+   * Draw the advertisements list received
    * @param {JSON} ads array of advertisements
    */
   drawAds(ads){
