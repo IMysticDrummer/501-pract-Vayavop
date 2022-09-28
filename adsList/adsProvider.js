@@ -1,11 +1,11 @@
 'use strict';
 
 export async function getAds() {
-  //const URLAds='http://localhost:8000/api/advertisements';
+  const URLAds='http://localhost:8000/api/advertisements';
   //Para probar error de URL
   //const URLAds='https://juanito-perez/api/advertisements';
   //Para probar error de no hay anuncios
-  const URLAds='http://localhost:8000/api/advertisement';
+  //const URLAds='http://localhost:8000/api/advertisement';
   let conectionResponse;
   let adsList;
   
@@ -20,7 +20,7 @@ export async function getAds() {
   }
 
   try {
-    ads=await conectionResponse.json();
+    adsList=await conectionResponse.json();
   } catch (error) {
     throw new Error('Sorry. We have problems with data. Contact administrator');
   }
