@@ -5,10 +5,20 @@ class APIConnector {
     this.baseURL='http://localhost:8000';
     this.endPoints={
       getTweetsList:'/advertisements',
-      register:'/auth/register'
+      register:'/auth/register',
+      login: '/auth/login'
     };
   };
 
+  /**
+   * Ask a POST request to API, passing
+   * an object with data to transmit
+   * Returns an JSON response or a
+   * stringfied error
+   * @param {apiConnector.endPoint} endPoint 
+   * @param {object} data 
+   * @returns JSON
+   */
   async post(endPoint, data) {
 
     let response;

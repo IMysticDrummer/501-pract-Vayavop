@@ -1,7 +1,7 @@
 'use strict';
 
-import { apiConnector } from "../apiConnector.js";
 import { pubSub } from "../pubSub.js";
+import { createApiUser, loginApiUser } from "./registerProvider.js";
 
 export class RegisterController {
   constructor(nodeElement) {
@@ -27,13 +27,8 @@ export class RegisterController {
         return;
       };
       
-      try {
-        await this.createUser();
-        pubSub.publish(pubSub.TOPICS.NOTIFICATION_OK, 'User created... login and redirection');
-        setTimeout(()=>console.log('tiempo pasado'),1500);
-      } catch (error) {
-        pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,`Problem with user creation: ${error.message}. Try another username`);
-      }
+      this.createUser();
+
     });
 
     this.activateSubmitButton();
@@ -97,12 +92,24 @@ export class RegisterController {
   };
 
   async createUser(){
-    const body={
-      username: this.userInputFieldElement.value,
-      password: this.passwordInputFieldElement.value
-    };
-
-    await apiConnector.post(apiConnector.endPoints.register, body);
-
+    try {
+      await createApiUser(this.userInputFieldElement.value, this.passwordInputFieldElement.value);
+      pubSub.publish(pubSub.TOPICS.NOTIFICATION_OK, 'User created... login and redirection');
+      this.loginUser();
+    } catch (error) {
+      const message=`Problem with user creation. Try another username`;
+      pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,`Problem with user creation. Try another username`);
+    }
+    
+  };
+  
+  async loginUser(){
+    try {
+      const jwt=await loginApiUser(this.userInputFieldElement.value, this.passwordInputFieldElement.value)
+      localStorage.setItem('token',jwt);
+      setTimeout(()=>{window.location='/'},1500);
+    } catch (error) {
+      pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,`Impossible to loggin. Check your credentials`);
+    }
   };
 };
