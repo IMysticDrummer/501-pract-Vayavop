@@ -1,9 +1,9 @@
 'use strict';
 
 import { pubSub } from "../pubSub.js";
-import { createApiUser, loginApiUser } from "./registerProvider.js";
+import { createApiUser, loginApiUser } from "./userIdProvider.js";
 
-export class RegisterController {
+export class UserIdController {
   constructor(nodeElement) {
     this.config={
       passwordMinLength: 6
@@ -91,6 +91,9 @@ export class RegisterController {
     });
   };
 
+  /**
+   * Ask user id provider to create an new user
+   */
   async createUser(){
     try {
       await createApiUser(this.userInputFieldElement.value, this.passwordInputFieldElement.value);
@@ -103,6 +106,9 @@ export class RegisterController {
     
   };
   
+  /**
+   * Ask user id provider to log in an user
+   */
   async loginUser(){
     try {
       const jwt=await loginApiUser(this.userInputFieldElement.value, this.passwordInputFieldElement.value)

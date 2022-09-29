@@ -10,12 +10,12 @@
 export function adsListViewBuilder(ad){
   let adView=`
     <p>Autor: ${ad.handler}</p>
-    <p>Artículo: ${ad.name}</p>
-    <p>Descripción: ${ad.description}</p>
+    <p>Article: ${ad.name}</p>
+    <p>Description: ${ad.description}</p>
   `;
-  ad.photo.length>0 ? adView+=`<p>Foto: ${ad.photo}</p>` : adView+=`<p>Sin foto</p>`
-  ad.shell===true ? adView+=`<p>Se vende</p>`: adView+=`<p>Se busca</p>`;
-  ad.shell===true ? adView+=`<p>Precio: ${ad.price}</p>`: adView+=`<p>Presupuesto: ${ad.price}</p>`;
+  ad.photo.length>0 ? adView+=`<p>Photo: ${ad.photo}</p>` : adView+=`<p>Sin foto</p>`
+  ad.shell===true ? adView+=`<p>Selling</p>`: adView+=`<p>Searching</p>`;
+  ad.shell===true ? adView+=`<p>Price: ${ad.price}</p>`: adView+=`<p>Budget: ${ad.price}</p>`;
 
   return adView;
 };
@@ -26,7 +26,7 @@ export function adsListViewBuilder(ad){
  */
 export function adsNotFoundBuilder(){
   let adNotFound=`
-    <h2>No se han encontrado anuncios</h2>
+    <h2>Advertissements not found</h2>
   `;
   return adNotFound;
 };
