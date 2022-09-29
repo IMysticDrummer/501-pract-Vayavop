@@ -1,5 +1,6 @@
 'use strict';
 
+import { apiConnector } from "../apiConnector.js";
 import { pubSub } from "../pubSub.js";
 
 export class RegisterController {
@@ -14,15 +15,8 @@ export class RegisterController {
     this.subscribeToEvents();
   };
 
-  /**
-   * Conditions:
-   * - user and password fields must be provided
-   * - password must be 6 characters long at least
-   * - user and password can't be the same
-   * -
-   */
   subscribeToEvents() {
-    this.nodeElement.addEventListener('submit', (event) => {
+    this.nodeElement.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       try {
@@ -30,16 +24,32 @@ export class RegisterController {
         this.controlUserPasswordDifferents();
       } catch (error) {
         pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,error);
+        return;
+      };
+      
+      try {
+        await this.createUser();
+        pubSub.publish(pubSub.TOPICS.NOTIFICATION_OK, 'User created... login and redirection');
+        setTimeout(()=>console.log('tiempo pasado'),1500);
+      } catch (error) {
+        pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,`Problem with user creation: ${error.message}. Try another username`);
       }
-      //this.createUser();
     });
 
     this.activateSubmitButton();
 
   };
 
+  /**
+   * Password validation conditions
+   * - Password with 6 characters at least
+   * - Password must be letters (normal or capital) and/or numbers.
+   * 
+   * In other case, throw an error
+   */
   validatePassword() {
-    //Password length
+    //Password length. This would'nt be necessary because button is not going to
+    //be activated until the password field contains the minimun characters.
     if (this.passwordInputFieldElement.value.length<this.config.passwordMinLength) {
       throw new Error(`Password must be ${this.config.passwordMinLength}
        characters long at least`);
@@ -53,12 +63,21 @@ export class RegisterController {
     };
   };
 
+  /**
+   * Control password <> username
+   * Throw error if they are the same
+   */
   controlUserPasswordDifferents() {
     if (this.passwordInputFieldElement.value===this.userInputFieldElement.value) {
       throw new Error('User and Password must be differents');
     };
   }
 
+  /**
+   * Submit button activate conditions:
+   * - username field with characters
+   * - password field with 6 characters at least
+   */
   activateSubmitButton() {
     const buttonSubmitForm=this.nodeElement.querySelector('button');
     const inputFieldElements=Array.from(this.nodeElement.querySelectorAll('input'));
@@ -75,5 +94,15 @@ export class RegisterController {
         }
       });
     });
+  };
+
+  async createUser(){
+    const body={
+      username: this.userInputFieldElement.value,
+      password: this.passwordInputFieldElement.value
+    };
+
+    await apiConnector.post(apiConnector.endPoints.register, body);
+
   };
 };

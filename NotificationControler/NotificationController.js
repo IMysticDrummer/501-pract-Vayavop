@@ -41,15 +41,19 @@ export class NotificationController{
     pubSub.subscribe(pubSub.TOPICS.NOTIFICATION_ERROR, (message) => {
       this.showNotification(message);
     });
+    pubSub.subscribe(pubSub.TOPICS.NOTIFICATION_OK, (message) => {
+      this.showNotification(message,true);
+    });
   };
 
   /**
    * Show the notification, containing the message, and with
    * a close button
    * @param {string || error} message 
+   * @param {boolean} optinnel. True if it's a succes notification
    */
-  showNotification(message) {
-    this.notificationElement.innerHTML=buildNotificationView(message);
+  showNotification(message, type) {
+    this.notificationElement.innerHTML=buildNotificationView(message,type);
 
     const closeButtonElement=this.notificationElement.querySelector('.notification-button-close');
     
