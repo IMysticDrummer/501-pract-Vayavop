@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Advertisement</title>
+</head>
+<body>
+<h1>Create advertisement</h1>
+
+  <section class="notification"></section>
+
+  <form name="createAdForm" id="createAdForm">
+    <label for="articleInput" class="articleLabel"></label>
+    <input id="articleInput type="text" class="articleInput" placeholder="Article">
+
+    <textarea class="descriptionInput" col="10" placeholder="Enter your article description"></textarea>
+
+    <label for="photoInput" class="photoLabel"></label>
+    <input id="photoInput" type="text" class="photoInput" placeholder="URL of your photo">
+
+    <label for="priceInput" class="priceLabel"></label>
+    <input id="priceInput" type="number" class="priceInput" placeholder="Introduce price or budget">
+
+    <fieldset>
+      <legend>Select sell or buy</legend>
+      <input type="radio" name="selling" id="selling" value="true">
+      <label for="selling">Selling</label>
+      <input type="radio" name="selling" id="searching" value="false">
+      <label for="searching">Searching</label>
+    </fieldset>
+
+    <button type="submit" class="submit">Send Advertisement</button>
+  </form>
+
+
+</body>
+</html>
