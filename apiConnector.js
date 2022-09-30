@@ -4,10 +4,30 @@ class APIConnector {
   constructor() {
     this.baseURL='http://localhost:8000';
     this.endPoints={
-      getTweetsList:'/advertisements',
+      getAdsList:'/api/advertisements',
       register:'/auth/register',
       login: '/auth/login'
     };
+  };
+
+  /**
+   * Get:
+   * - list of advertisements
+   * - one advertisement (/advertisement/<id>)
+   * @param {apiConnector.endPoint} endPoint 
+   * @returns 
+   */
+  async get(endPoint) {
+    let response;
+    try {
+      response=await fetch(`${this.baseURL}${endPoint}`,{method: 'GET'});
+    } catch (error) {
+      throw new Error('Fail to get data');
+    };
+
+    if (!response.ok) {throw new Error('There\'s no advertisements')};
+
+    return response.json();
   };
 
   /**

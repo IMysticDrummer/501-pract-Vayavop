@@ -9,7 +9,7 @@
  */
 export function adsListViewBuilder(ad){
   let adView=`
-    <a href="?${ad.id}">
+    <a href="../adDetail/index.html?id=${ad.id}">
     <p>Autor: ${ad.author}</p>
     <p>Product: ${ad.product}</p>
     <p>Description: ${ad.description}</p>
@@ -18,7 +18,8 @@ export function adsListViewBuilder(ad){
   ad.sell===true ? adView+=`<p>Selling</p>`: adView+=`<p>Searching</p>`;
   ad.sell===true ? adView+=`<p>Price: ${ad.price}</p>`: adView+=`<p>Budget: ${ad.price}</p>`;
 
-  return adView+=`</a>`;
+  adView+='</a>';
+  return adView;
 };
 
 /**
