@@ -1,38 +1,49 @@
 'use strict';
 
+import { createApiAd } from "./createAdProvider.js";
+import { pubSub } from "../pubSub.js";
+
 export class CreateAdController {
+  /**
+   * Advertisements create controller
+   * @param {document.element} nodeElemnt 
+   */
   constructor(nodeElemnt){
-    this.createAdForm=nodeElemnt;
+    this.createAdFormElement=nodeElemnt;
+
+    this.subscribeToEvents();
   };
 
   subscribeToEvents(){
-    this.createAdForm.addEventListener('submit', (event) => {
+    this.createAdFormElement.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      const formData = new FormData(this.createAdForm)
-      const adObject={
-        articleInputValue: formData.get('articleInput'),
-        descriptionInputValue: formData.get('descriptionInput'),
-        photoInputValue: formData.get('photoInput'),
-        priceInputValue: formData.get('priceInput'),
-        sellingInputValue: formData.get('selling')==="true"
-      };
-
-      try {
-        //TODO data validation
-        
-      } catch (error) {
-        //TODO error notification
-      }
-
-      try {
-        //TODO Send ad function
-          //TODO Create a provider
-            //TODO Modification apiConnection.post adding bearer token
-      } catch (error) {
-        //TODO error notification
-      }
-
+      this.createAdvertisement();
     });
+  };
+
+  async createAdvertisement() {
+    const formData = new FormData(this.createAdFormElement);
+    const adObject={
+      author: formData.get('articleInput'),
+      product: formData.get('descriptionInput'),
+      photo: formData.get('photoInput'),
+      price: parseFloat(formData.get('priceInput')),
+      sell: formData.get('selling')==="true"
+    };
+
+    try {
+      //TODO data validation
+      
+    } catch (error) {
+      pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, `Error de datos: ${error}`);
+    }
+
+    try {
+      await createApiAd(adObject);
+      pubSub.publish(pubSub.TOPICS.NOTIFICATION_OK, "Advertisement created");
+    } catch (error) {
+      pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, "Fail creating advertisement");
+    }
   };
 };

@@ -7,21 +7,21 @@
   <title>Create Advertisement</title>
 </head>
 <body>
-<h1>Create advertisement</h1>
+  <h1>Create advertisement</h1>
 
   <section class="notification"></section>
 
-  <form name="createAdForm" id="createAdForm">
+  <form id="createAdForm" novalidate>
     <label for="articleInput" class="articleLabel"></label>
-    <input id="articleInput type="text" class="articleInput" placeholder="Article">
+    <input id="articleInput" name="articleInput" type="text" class="articleInput" placeholder="Article">
 
-    <textarea class="descriptionInput" col="10" placeholder="Enter your article description"></textarea>
+    <textarea class="descriptionInput" name="descriptionInput" col="10" placeholder="Enter your article description"></textarea>
 
     <label for="photoInput" class="photoLabel"></label>
-    <input id="photoInput" type="text" class="photoInput" placeholder="URL of your photo">
+    <input id="photoInput" name="photoInput" type="text" class="photoInput" placeholder="URL of your photo">
 
     <label for="priceInput" class="priceLabel"></label>
-    <input id="priceInput" type="number" class="priceInput" placeholder="Introduce price or budget">
+    <input id="priceInput" name="priceInput" type="number" class="priceInput" step=".01" placeholder="Introduce price or budget">
 
     <fieldset>
       <legend>Select sell or buy</legend>
@@ -34,6 +34,7 @@
     <button type="submit" class="submit">Send Advertisement</button>
   </form>
 
+  <script type="module" src="./index.js"></script>
 
 </body>
 </html>
