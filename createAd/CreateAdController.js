@@ -25,8 +25,8 @@ export class CreateAdController {
   async createAdvertisement() {
     const formData = new FormData(this.createAdFormElement);
     const adObject={
-      author: formData.get('articleInput'),
-      product: formData.get('descriptionInput'),
+      product: formData.get('articleInput'),
+      description: formData.get('descriptionInput'),
       photo: formData.get('photoInput'),
       price: parseFloat(formData.get('priceInput')),
       sell: formData.get('selling')==="true"
@@ -41,7 +41,8 @@ export class CreateAdController {
 
     try {
       await createApiAd(adObject);
-      pubSub.publish(pubSub.TOPICS.NOTIFICATION_OK, "Advertisement created");
+      pubSub.publish(pubSub.TOPICS.NOTIFICATION_OK, "Advertisement created. Redirecting main window");
+      setTimeout(()=>window.location="/", 1500);
     } catch (error) {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, "Fail creating advertisement");
     }

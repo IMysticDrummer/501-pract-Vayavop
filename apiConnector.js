@@ -67,6 +67,45 @@ class APIConnector {
 
     return response.json();
   };
+
+  /**
+   * Ask a DELETE request to API, passing
+   * an object with data to transmit
+   * Returns an JSON response or a
+   * stringfied error
+   * @param {apiConnector.endPoint} endPoint 
+   * @param {object} data 
+   * @returns JSON
+   */
+  async delete(endPoint, data) {
+
+    let response;
+
+    try {
+      response=await fetch(`${this.baseURL}${endPoint}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(data)
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+
+    if (!response.ok) {
+      const error={
+        status: response.status,
+        message: response.statusText
+      };
+      throw new Error(JSON.stringify(error));
+    };
+
+    return response.json();
+  };
+
 };
 
 export const apiConnector=new APIConnector();

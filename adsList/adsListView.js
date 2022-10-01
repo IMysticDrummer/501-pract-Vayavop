@@ -10,7 +10,6 @@
 export function adsListViewBuilder(ad){
   let adView=`
     <a href="../adDetail/index.html?id=${ad.id}">
-    <p>Autor: ${ad.author}</p>
     <p>Product: ${ad.product}</p>
     <p>Description: ${ad.description}</p>
   `;
