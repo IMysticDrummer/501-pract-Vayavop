@@ -6,7 +6,29 @@ import { NotificationController } from "../NotificationControler/NotificationCon
 document.addEventListener('DOMContentLoaded', () => {
   const registerFormElement=document.querySelector('.registerForm');
 
-  const registerController=new UserIdController(registerFormElement);
+  const typeFunction=setTitlesAndFunction();
+  const registerController=new UserIdController(registerFormElement, typeFunction);
 
   const notificationElement=new NotificationController(document.querySelector("#notification"));
 });
+
+/**
+ * Get the *type* URL param, set titles
+ * according the function selected and
+ * return a string with the *type*
+ * @returns string
+ */
+function setTitlesAndFunction() {
+  const titlePage=document.querySelector('title');
+  const titleHeader=document.querySelector('.titleHeader');
+  const buttonSubmitForm=document.querySelector('button');
+  const params=new URLSearchParams(location.search);
+  const typeFunction=params.get('type');
+  let title;
+
+  typeFunction==="sign" ? title="SignUp" : title="Login";
+  buttonSubmitForm.innerText=title;
+  titlePage.innerText=title+" Page";
+  titleHeader.innerHTML=title+" Page";
+  return typeFunction;
+};

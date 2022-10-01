@@ -4,35 +4,38 @@ import { pubSub } from "../pubSub.js";
 import { createApiUser, loginApiUser } from "./userIdProvider.js";
 
 export class UserIdController {
-  constructor(nodeElement) {
+  constructor(nodeElement, typeFunction) {
     this.config={
       passwordMinLength: 6
     };
     this.nodeElement=nodeElement;
+    this.signup=typeFunction==="sign";
     this.passwordInputFieldElement=this.nodeElement.querySelector('#passwordInputField');
     this.userInputFieldElement=this.nodeElement.querySelector('#userInputField');
 
     this.subscribeToEvents();
-  };
 
+  };
+  
   subscribeToEvents() {
     this.nodeElement.addEventListener('submit', async (event) => {
       event.preventDefault();
-
-      try {
-        this.validatePassword();
-        this.controlUserPasswordDifferents();
-      } catch (error) {
-        pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,error);
-        return;
-      };
-      
-      this.createUser();
-
+      this.signup ? this.signupUser() : this.loginUser();
     });
-
+    
     this.activateSubmitButton();
-
+  };
+  
+  
+  signupUser(){
+    try {
+      this.validatePassword();
+      this.controlUserPasswordDifferents();
+    } catch (error) {
+      pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,error);
+      return;
+    };
+    this.createUser();
   };
 
   /**
