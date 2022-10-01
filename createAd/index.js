@@ -2,12 +2,33 @@
 
 import { CreateAdController } from "./CreateAdController.js";
 import { NotificationController } from "../NotificationControler/NotificationController.js";
+import { pubSub } from "../pubSub.js";
 
-document.addEventListener('DOMContentLoaded',() => {
-  const createAdFormElement=document.querySelector('#createAdForm');
+document.addEventListener('DOMContentLoaded', async () => {
   const notificationElement=document.querySelector('.notification');
-
-  const createAdController=new CreateAdController(createAdFormElement);
   const notificationController=new NotificationController(notificationElement);
   
+  const createAdFormElement=document.querySelector('#createAdForm');
+  try{
+    await userIdentified();
+  } catch (error) {
+    createAdFormElement.innerHTML="";
+    pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, "You are not identified. Please login...");
+    setTimeout(()=>{window.location="../UserIdentification"}, 1500);
+    return;
+  }
+  
+  const createAdController=new CreateAdController(createAdFormElement);
+  
 });
+
+function userIdentified() {
+  const  tokenExist=localStorage.getItem('token');
+
+  return new Promise ((resolve, reject) => {
+    if (!tokenExist) {
+      reject();
+    } else {resolve();};
+    return;
+  });
+}
