@@ -11,4 +11,10 @@ document.addEventListener('DOMContentLoaded',()=>{
   const titleHeader=document.querySelector('#titleHeader');
   const titlePage=document.querySelector('title');
   titleHeader.innerHTML=titlePage.innerText;
+
+  const createAdLink=document.querySelector('#createAd');
+  if (!localStorage.getItem('token')){
+    createAdLink.innerHTML="";
+  };
+
 });
