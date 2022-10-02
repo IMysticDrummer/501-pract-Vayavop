@@ -17,10 +17,10 @@ body {
   border-radius: 5px;
   color:blue;
   background-color:gold; 
-  transition: width 1s;
+  transition: background-color 1s;
 }
 .adListItem:hover{
-  width: 110%;
+  background-color: orange;
 }
 .adListItem a{
   text-decoration: none;
@@ -41,8 +41,5 @@ body {
   .adListItem {
     width: 40%;
     margin: 10px;
-  }
-  .adListItem:hover{
-    width: 45%;
   }
 }

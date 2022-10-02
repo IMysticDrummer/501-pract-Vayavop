@@ -4,7 +4,7 @@ header{
   flex-wrap: wrap;
   margin: 0 auto 20px auto;
   background-color: blue;
-  color: azure;
+  color: gold;
   padding: 10px;
   position: sticky;
   top:0;
@@ -20,7 +20,7 @@ header{
 }
 .navBarContainer a{
   text-decoration: none;
-  color: azure;
+  color: inherit;
   transition: color 0.3s, font-size 0.3s;
 }
 .navBarContainer a:hover{
