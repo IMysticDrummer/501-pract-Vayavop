@@ -12,8 +12,6 @@ export class AdsController {
   };
 
   async loadAds(){
-    //spinner
-    const spinner=this.drawSpinner();
 
     //getting advertisements and quit spinner
     let ads;
@@ -23,7 +21,7 @@ export class AdsController {
       //pubsub to notify
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, error);
     }
-    spinner.classList.toggle('hide');
+    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
 
     //Show results
     if (!ads) {this.showAdsNotFound();};
@@ -57,13 +55,5 @@ export class AdsController {
     }
   };
 
-  /**
-   * Draw and return de spinner element
-   * @returns document element pointing the spinner
-   */
-  drawSpinner(){
-    this.parentNode.innerHTML=spinnerBuild();
-    return document.querySelector('.spinner');
-  };
 };
 

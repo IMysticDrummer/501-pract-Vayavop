@@ -1,9 +1,13 @@
 'use strict';
 
+import { Spinner } from "/Spinner/Spinner.js";
 import { UserIdController } from "./UserIdController.js";
 import { NotificationController } from "../NotificationControler/NotificationController.js"
 
 document.addEventListener('DOMContentLoaded', () => {
+  const spinnerContainer=document.querySelector('.spinnerContainer');
+  const spinner=new Spinner(spinnerContainer);
+
   const registerFormElement=document.querySelector('.registerForm');
 
   const typeFunction=setTitlesAndFunction();
@@ -21,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function setTitlesAndFunction() {
   const titlePage=document.querySelector('title');
   const titleHeader=document.querySelector('.titleHeader');
-  const buttonSubmitForm=document.querySelector('button');
+  const buttonSubmitForm=document.querySelector('.submit');
   const params=new URLSearchParams(location.search);
   const typeFunction=params.get('type');
   let title;

@@ -3,8 +3,12 @@
 import { CreateAdController } from "./CreateAdController.js";
 import { NotificationController } from "../NotificationControler/NotificationController.js";
 import { pubSub } from "../pubSub.js";
+import { Spinner } from "/Spinner/Spinner.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
+  const spinnerContainer=document.querySelector('.spinnerContainer');
+  const spinner=new Spinner(spinnerContainer); 
+   
   const notificationElement=document.querySelector('.notification');
   const notificationController=new NotificationController(notificationElement);
   
@@ -19,6 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   
   const createAdController=new CreateAdController(createAdFormElement);
+
   
 });
 

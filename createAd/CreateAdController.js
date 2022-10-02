@@ -15,9 +15,11 @@ export class CreateAdController {
   };
 
   subscribeToEvents(){
+    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
     this.createAdFormElement.addEventListener('submit', (event) => {
       event.preventDefault();
 
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
       this.createAdvertisement();
     });
   };
@@ -46,5 +48,6 @@ export class CreateAdController {
     } catch (error) {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, "Fail creating advertisement");
     }
+    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
   };
 };

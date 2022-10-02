@@ -13,6 +13,7 @@ export class UserIdController {
     this.passwordInputFieldElement=this.nodeElement.querySelector('#passwordInputField');
     this.userInputFieldElement=this.nodeElement.querySelector('#userInputField');
 
+    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW, '');
     this.subscribeToEvents();
 
   };
@@ -20,6 +21,8 @@ export class UserIdController {
   subscribeToEvents() {
     this.nodeElement.addEventListener('submit', async (event) => {
       event.preventDefault();
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW, '');
+
       this.signup ? this.signupUser() : this.loginUser();
     });
     
@@ -77,7 +80,7 @@ export class UserIdController {
    * - password field with 6 characters at least
    */
   activateSubmitButton() {
-    const buttonSubmitForm=this.nodeElement.querySelector('button');
+    const buttonSubmitForm=this.nodeElement.querySelector('.submit');
     const inputFieldElements=Array.from(this.nodeElement.querySelectorAll('input'));
 
     inputFieldElements.forEach(inputFieldElement => {
@@ -105,6 +108,7 @@ export class UserIdController {
     } catch (error) {
       const message=`Problem with user creation. Try another username`;
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,`Problem with user creation. Try another username`);
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW, '');
     }
     
   };
@@ -116,9 +120,11 @@ export class UserIdController {
     try {
       const jwt=await loginApiUser(this.userInputFieldElement.value, this.passwordInputFieldElement.value)
       localStorage.setItem('token',jwt);
+      pubSub.publish(pubSub.TOPICS.NOTIFICATION_OK,`Login Ok. Redirecting main page..`);
       setTimeout(()=>{window.location='/'},1500);
     } catch (error) {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,`Impossible to loggin. Check your credentials`);
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW, '');
     }
   };
 };
