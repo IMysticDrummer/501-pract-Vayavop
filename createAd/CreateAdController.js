@@ -2,6 +2,7 @@
 
 import { createApiAd } from "./createAdProvider.js";
 import { pubSub } from "../pubSub.js";
+import { Advertisement } from "../Advertisement/Advertisement.js";
 
 export class CreateAdController {
   /**
@@ -26,19 +27,20 @@ export class CreateAdController {
 
   async createAdvertisement() {
     const formData = new FormData(this.createAdFormElement);
-    const adObject={
-      product: formData.get('articleInput'),
-      description: formData.get('descriptionInput'),
-      photo: formData.get('photoInput'),
-      price: parseFloat(formData.get('priceInput')),
-      sell: formData.get('selling')==="true"
-    };
-
+    let adObject;
     try {
-      //TODO data validation
+      adObject=new Advertisement(
+        formData.get('articleInput'),
+        formData.get('descriptionInput'),
+        parseFloat(formData.get('priceInput')),
+        formData.get('selling')==="true",
+        formData.get('photoInput')
+      );
       
     } catch (error) {
-      pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, `Error de datos: ${error}`);
+      pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, `Error de datos-> ${error}`);
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+      return;
     }
 
     try {
@@ -48,6 +50,6 @@ export class CreateAdController {
     } catch (error) {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, "Fail creating advertisement");
     }
-    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+    
   };
 };
