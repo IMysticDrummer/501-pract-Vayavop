@@ -31,6 +31,7 @@ export class AdDetailController {
     if (this.controlLoggedOwner(ad)) {
       this.addEraseButton(adId);
     };
+    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
   };
 
   controlLoggedOwner(ad){

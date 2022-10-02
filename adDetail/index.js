@@ -2,8 +2,12 @@
 
 import { AdDetailController } from "./AdDetailController.js";
 import { NotificationController } from "../NotificationControler/NotificationController.js";
+import { Spinner } from "../Spinner/Spinner.js";
 
 document.addEventListener('DOMContentLoaded', () => {
+  const spinnerContainer=document.querySelector('.spinnerContainer');
+  const spinnerController=new Spinner(spinnerContainer);
+  
   const adDetailViewContainer=document.querySelector('.adViewContainer');
   const notificationContainer=document.querySelector('.notification');
 

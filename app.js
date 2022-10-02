@@ -17,4 +17,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     createAdLink.innerHTML="";
   };
 
+  const prueba=document.createElement('link');
+  prueba.rel="stylesheet";
+  prueba.href="/";
+  const head=document.querySelector('head');
+  head.appendChild(prueba);
+
 });
