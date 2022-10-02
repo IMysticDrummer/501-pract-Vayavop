@@ -44,3 +44,16 @@ h6 {
   font-size: 1.2em;
   margin: 0.67em 0;
 }
+button{
+  order:35;
+  background-color: blue;
+  color: gold;
+  transition: color 0.5s;
+  border-radius: 5px;
+  box-shadow: 10px;
+  height: 2em;
+  margin-top: 15px;
+}
+button:hover{
+  color: orange;
+}

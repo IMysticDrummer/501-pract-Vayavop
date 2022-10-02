@@ -24,19 +24,7 @@ p{
 .productParagraph, .priceParagraph{
   font-size: 1.25em;
 }
-button{
-  order:35;
-  background-color: blue;
-  color: gold;
-  transition: color 0.5s;
-  border-radius: 5px;
-  box-shadow: 10px;
-  height: 2em;
-  margin-top: 15px;
-}
-button:hover{
-  color: orange;
-}
+
 
 @media (min-width:768px) {
   .productImg{
