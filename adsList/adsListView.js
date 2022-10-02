@@ -10,12 +10,12 @@
 export function adsListViewBuilder(ad){
   let adView=`
     <a href="../adDetail/index.html?id=${ad.id}">
-    <p>Product: ${ad.product}</p>
-    <p>Description: ${ad.description}</p>
+    <p class="productParagraph">Product: ${ad.product}</p>
+    <p class="descriptionParagraph">Description: ${ad.description}</p>
   `;
-  ad.photo.length>0 ? adView+=`<p>Photo: ${ad.photo}</p>` : adView+=`<p>Sin foto</p>`
-  ad.sell===true ? adView+=`<p>Selling</p>`: adView+=`<p>Searching</p>`;
-  ad.sell===true ? adView+=`<p>Price: ${ad.price}</p>`: adView+=`<p>Budget: ${ad.price}</p>`;
+  ad.photo.length>0 ? adView+=`<img class="productImg" src="${ad.photo}"></img>` : adView+=`<p class="productImg" >Sin foto</p>`
+  ad.sell===true ? adView+=`<p class="sellParagraph">Selling</p>`: adView+=`<p class="sellParagraph">Searching</p>`;
+  ad.sell===true ? adView+=`<p class="priceParagraph">Price: ${ad.price}</p>`: adView+=`<p class="priceParagraph">Budget: ${ad.price}</p>`;
 
   adView+='</a>';
   return adView;
