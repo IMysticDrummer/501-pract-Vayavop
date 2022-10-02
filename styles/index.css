@@ -8,11 +8,13 @@ body {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  align-items: stretch;
 }
 
 .adListItem{
   margin: 5px 0 10px 0;
   padding: 10px;
+  width: 100%;
   border: 2px solid blue;
   border-radius: 5px;
   color:blue;
@@ -25,6 +27,39 @@ body {
 .adListItem a{
   text-decoration: none;
   color: inherit;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+a p{
+  margin: 3px;
+}
+
+.productImg{
+  width: 95%;
+  height: 200px;
+  margin: 10px;
+  object-fit: contain;
+  order: 3;
+}
+
+.productParagraph{
+  font-weight: bold;
+  font-size: 1.1em;
+  order:1;
+  width: 100%;
+}
+.priceParagraph{
+  order:2;
+  font-weight: bold;
+  color: green;
+}
+.descriptionParagraph{
+  order:4;
+}
+.sellParagraph{
+  order: 5;
+  width: 100%;
 }
 
 @media (min-width:1024px) {
