@@ -40,25 +40,25 @@ a p{
   height: 200px;
   margin: 10px;
   object-fit: contain;
-  order: 3;
+  order: 15;
 }
 
 .productParagraph{
   font-weight: bold;
   font-size: 1.1em;
-  order:1;
+  order:5;
   width: 100%;
 }
 .priceParagraph{
-  order:2;
+  order:10;
   font-weight: bold;
   color: green;
 }
 .descriptionParagraph{
-  order:4;
+  order:20;
 }
 .sellParagraph{
-  order: 5;
+  order: 25;
   width: 100%;
 }
 

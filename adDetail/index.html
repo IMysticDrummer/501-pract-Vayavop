@@ -4,17 +4,34 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advertisement Detail</title>
+  <title>VayaPop: Advertisement Detail</title>
   <link rel="stylesheet" href="/Spinner/spinner.css">
+  <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="/styles/normalize.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <link rel="stylesheet" href="/styles/index.css">
+  <link rel="stylesheet" href="/styles/adDetailStyles.css">
 </head>
 <body>
-  <h1>Advertisement Detail</h1>
-  <section class="notification"></section>
-  <section class="spinnerContainer"></section>
-  <section class="adViewContainer"></section>
-
-  <a href="/"><button>Return Main Page</button></a>
+  <header>
+    <h1 id="titleHeader"></h1>
+    <nav class="navBarContainer">
+      <ul>
+        <li><a href="/UserIdentification/index.html?type=sign" id="sign">SignUp</a></li>
+        <li><a href="/UserIdentification/index.html?type=login" id="login">Login</a></li>
+        <li><a href="/">Return Main Page</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h2>Advertisement Detail</h2>
+    <section class="notification"></section>
+    <section class="spinnerContainer"></section>
+    <section class="adViewContainer"></section>
+  </main>
 
   <script type="module" src="./index.js"></script>
+
 </body>
 </html>

@@ -17,4 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const notificationController=new NotificationController(notificationContainer);
   const adDetailController=new AdDetailController(adDetailViewContainer);
   adDetailController.showAd(adId);
+
+  const titleHeader=document.querySelector('#titleHeader');
+  const titlePage=document.querySelector('title');
+  titleHeader.innerHTML=titlePage.innerText;
 });

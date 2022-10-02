@@ -1,0 +1,56 @@
+p{
+  margin: 10px;
+}
+.adViewContainer{
+  width: 95%;
+  margin:10px auto;
+  color:blueviolet;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.authorParagraph{
+  order:30;
+  width: 100%;
+  font-size: 1.1em;
+  color: darkmagenta;
+}
+
+.sellParagraph{
+  order: 3;
+  font-size: 1.4em;
+  color: darkmagenta;
+}
+.productParagraph, .priceParagraph{
+  font-size: 1.25em;
+}
+button{
+  order:35;
+  background-color: blue;
+  color: gold;
+  transition: color 0.5s;
+  border-radius: 5px;
+  box-shadow: 10px;
+  height: 2em;
+  margin-top: 15px;
+}
+button:hover{
+  color: orange;
+}
+
+@media (min-width:768px) {
+  .productImg{
+    height: 300px;
+  }
+  
+}
+@media (min-width:1024px) {
+  .productImg{
+    height: 500px;
+  }
+  
+  p{
+    font-size: 1.2em;
+  }
+  
+}
