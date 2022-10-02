@@ -46,6 +46,7 @@ export class AdsController {
     for (const ad of ads) {
       //Create container
       const childElement=document.createElement('article');
+      childElement.classList.add('adListItem');
       //Build the ad view in html
       const adView=adsListViewBuilder(ad);
       //Add the ad view to container

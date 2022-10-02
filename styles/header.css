@@ -1,0 +1,68 @@
+header{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto 20px auto;
+  background-color: blue;
+  color: azure;
+  padding: 10px;
+  position: sticky;
+  top:0;
+}
+
+#titleHeader{
+  width: 100%;
+  text-align: center;
+}
+
+.navBarContainer{
+  text-align: left;
+}
+.navBarContainer a{
+  text-decoration: none;
+  color: azure;
+  transition: color 0.3s, font-size 0.3s;
+}
+.navBarContainer a:hover{
+  color:orange;
+  font-size: 1.1em;
+}
+
+@media (min-width:768px) {
+  header{
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  #titleHeader{
+    width: 70%;
+    text-align: left;
+  }
+  .navBarContainer{
+    text-align: right;
+  }
+}
+
+@media (min-width:1024px) {
+
+  #titleHeader{
+    width: 60%;
+  }
+
+  .navBarContainer{
+    width: 40%;
+  }
+
+  .navBarContainer>ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
+
+@media (min-width:1440px) {
+  header{
+    width: 100%;
+    padding: 0 10% 0 10%;
+  }
+}

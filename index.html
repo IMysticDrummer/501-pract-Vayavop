@@ -9,21 +9,27 @@
   <link rel="stylesheet" href="./styles/reset.css">
   <link rel="stylesheet" href="./styles/normalize.css">
   <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="./styles/index.css">
+  <link rel="stylesheet" href="./styles/header.css">
   <link rel="stylesheet" href="/Spinner/spinner.css">
 </head>
 <body>
   <header>
     <h1 id="titleHeader"></h1>
-    <section class="signLogin">
-      <a href="/UserIdentification/index.html?type=sign" id="sign">SignUp</a>
-      <a href="/UserIdentification/index.html?type=login" id="login">Login</a>
-      <a disabled href="/createAd/" id="createAd">Create Advertisement</a>
-    </section>
+    <nav class="navBarContainer">
+      <ul>
+        <li><a href="/UserIdentification/index.html?type=sign" id="sign">SignUp</a></li>
+        <li><a href="/UserIdentification/index.html?type=login" id="login">Login</a></li>
+        <li><a disabled href="/createAd/" id="createAd">Create Advertisement</a></li>
+      </ul>
+    </nav>
   </header>
-  <section class="spinnerContainer"></section>
-  <section id="advertisements"></section>
-  <section id="notification"></section>
-  
+  <main>
+    <section class="spinnerContainer"></section>
+    <section id="advertisements"></section>
+    <section id="notification"></section>
+  </main>
+
   <script type="module" src="./app.js"></script>
 
 </body>

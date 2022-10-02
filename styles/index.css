@@ -1,0 +1,48 @@
+body {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+#advertisements{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.adListItem{
+  margin: 5px 0 10px 0;
+  padding: 10px;
+  border: 2px solid blue;
+  border-radius: 5px;
+  color:blue;
+  background-color:gold; 
+  transition: width 1s;
+}
+.adListItem:hover{
+  width: 110%;
+}
+.adListItem a{
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (min-width:1024px) {
+  body{
+    width: 100%;
+    margin: 0 auto 0 auto;
+  }
+
+  main{
+    width: 768px;
+    margin: 0 auto 0 auto;
+  }
+
+  .adListItem {
+    width: 40%;
+    margin: 10px;
+  }
+  .adListItem:hover{
+    width: 45%;
+  }
+}
