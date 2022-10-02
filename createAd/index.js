@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   
   const createAdController=new CreateAdController(createAdFormElement);
 
+  const titleHeader=document.querySelector('#titleHeader');
+  const titlePage=document.querySelector('title');
+  titleHeader.innerHTML=titlePage.innerText;
   
 });
 
