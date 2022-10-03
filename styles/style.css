@@ -80,3 +80,17 @@ button{
 button:hover{
   color: orange;
 }
+button:disabled{
+  background-color: grey;
+  color: azure;
+}
+
+.errorNotification{
+  background-color: darkred;
+  color:azure;
+}
+
+.successNotification{
+  background-color: darkgreen;
+  color: azure;
+}
