@@ -1,7 +1,7 @@
 'use strict';
 
 import { pubSub } from "../pubSub.js";
-import { getAdById, eraseApiAdById } from "./adDetailProvider.js";
+import { getAdById, deleteApiAdById } from "./adDetailProvider.js";
 import { buildAdDetailView } from "./adDetailView.js";
 
 export class AdDetailController {
@@ -29,7 +29,7 @@ export class AdDetailController {
     };
     this.adDetailViewContainer.innerHTML=buildAdDetailView(ad);
     if (this.controlLoggedOwner(ad)) {
-      this.addEraseButton(adId);
+      this.addDeteleButton(adId);
     };
     pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
   };
@@ -43,21 +43,21 @@ export class AdDetailController {
     return false;
   };
 
-  addEraseButton(adId){
-    const eraseButtonElement=document.createElement('button');
-    eraseButtonElement.textContent='Erase this advertisement';
-    this.adDetailViewContainer.appendChild(eraseButtonElement);
-    eraseButtonElement.addEventListener('click', () => {
+  addDeteleButton(adId){
+    const deleteButtonElement=document.createElement('button');
+    deleteButtonElement.textContent='Delete this advertisement';
+    this.adDetailViewContainer.appendChild(deleteButtonElement);
+    deleteButtonElement.addEventListener('click', () => {
       this.removeAdById(adId);
     });
   };
 
   async removeAdById(adId){
-    const response=window.confirm('Really do you want to ERASE this advertisement?!!');
+    const response=window.confirm('Really do you want to DELELTE this advertisement?!!');
     if (response) {
       try {
-        await eraseApiAdById(adId);
-        window.alert('This advertisement has been succesfully ERASED');
+        await deleteApiAdById(adId);
+        window.alert('This advertisement has been succesfully DELETED');
         window.location="/";
       } catch (error) {
         pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, 'Error erasing this advertisement');

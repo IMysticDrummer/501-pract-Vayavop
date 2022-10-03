@@ -13,10 +13,10 @@ export const getAdById=async (adId) => {
 };
 
 /**
- * Ask API **ERASE/DELETE** an advertisement
+ * Ask API **DELETE** an advertisement
  * @param {integer} adId id of the advertisement
  * @returns 
  */
-export const eraseApiAdById=async (adId) => {
+export const deleteApiAdById=async (adId) => {
   return await apiConnector.delete(`${apiConnector.endPoints.getAdsList}/${adId}`);
 };

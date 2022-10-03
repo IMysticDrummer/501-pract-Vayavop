@@ -1,1 +1,126 @@
-{"advertisements":[{"product":"batamanta","photo":"https://i.postimg.cc/mZXY9BBq/batamanta.jpg","description":"Busco batamanta tamaño XXXL para meterme debajo 7 veces y dejar espacio a mi pareja. Se agradecería que fuese calentita, pero que no se hagan bolillas","price":40,"sell":false,"userId":1,"updatedAt":"2022-09-29T21:49:08.982Z","id":3},{"product":"bicileta","photo":"https://i.postimg.cc/CxhHnN2h/bici.jpg","description":"Bicicleta de montaña. Sólo usada dos veces. La segunda caída por un barranco.\nLa bicicleta está prácticamente nueva, salvo por las ruedas hechas un ocho y el cuadro partido","price":125,"sell":true,"userId":1,"updatedAt":"2022-09-29T21:49:08.982Z","id":2},{"product":"televisor de 15\"","photo":"https://i.postimg.cc/brfV7nwZ/televisor.jpg","description":"televisor de 15\" con TDT (todo el deporte tachado), 2 entradas HDMI (había dos mal indicadas) y mando a distancia (con palo selfie).\nMarca LJ (Lorenzo José). Seminuevo","price":50,"sell":true,"userId":1,"updatedAt":"2022-09-29T21:50:20.963Z","id":1},{"product":"Ordeñador","description":"Por favor, no confundir con ordenador.\n\nSí, sí, es un ordeñador, para las vacas","photo":"","price":"550","sell":false,"userId":1,"updatedAt":"2022-10-01T16:00:06.013Z","id":4},{"product":"Cargador móvil","description":"Busco un cargador móvil.\nMe refiero a uno que se mueva sólo.\nEstoy harto de tener que buscar el cargador.\nQuiero que le llame y venga por sí mismo","photo":"https://i.postimg.cc/KjcvD1hM/cargador-movil.jpg","price":33.45,"sell":false,"userId":1,"updatedAt":"2022-10-01T16:09:55.061Z","id":5},{"product":"Absorbedor","description":"Vendo cosa que absorbe.\nAbsorbe la comida, absorbe el sueldo, absorbe la ropa...\ntodo.\n\nLo vendo muy barato, casi regalado.\nGracias","photo":"","price":0.15,"sell":true,"userId":2,"updatedAt":"2022-10-01T16:13:39.828Z","id":6},{"product":"Uno y Uno","description":"Son dos","photo":"","price":2,"sell":true,"userId":2,"updatedAt":"2022-10-01T20:18:45.511Z","id":7},{"product":"Periodico","description":"Periódico que contiene la noticia de mi nacimiento.\nPor si a alguien le hace ilusión","photo":"https://i.postimg.cc/7ZXvSKYm/periodico.jpg","price":25.5,"sell":true,"userId":1,"updatedAt":"2022-10-01T20:40:19.917Z","id":8},{"product":"Guía Telefónica","description":"Busco guía telefónica del año 1980, para buscar mi antiguo teléfono, que no me acuerdo el número","photo":"https://i.postimg.cc/50sM1pDX/guia-tel.jpg","price":35,"sell":false,"userId":1,"updatedAt":"2022-10-01T20:44:29.279Z","id":9},{"product":"Agua","description":"Botella de...\nReferencias al tío perdido en el desierto","photo":"","price":1,"sell":true,"userId":1,"updatedAt":"2022-10-02T15:20:23.993Z","id":10},{"product":"Teclado inverso","description":"Hola, soy zurdo y con los dedos al revés.\nBusco un teclado inverso que me facilite escribir en el ordenador.\nGracias","photo":"","price":75.75,"sell":false,"userId":1,"updatedAt":"2022-10-02T15:51:20.225Z","id":11}],"users":[{"username":"ivan1","password":"$2b$10$WPyji2DfbOSB9aDX7G46ce9omK0Jg0if6N0TGV7ykkc1ipEtI6bfO","id":1},{"username":"ivan2","password":"$2b$10$WPyji2DfbOSB9aDX7G46ce9omK0Jg0if6N0TGV7ykkc1ipEtI6bfO","id":2}]}
+{
+  "advertisements": [
+    {
+      "product": "batamanta",
+      "photo": "https://i.postimg.cc/kXrQNXj0/batamanta.jpg",
+      "description": "Busco batamanta tamaño XXXL para meterme debajo 7 veces y dejar espacio a mi pareja. Se agradecería que fuese calentita, pero que no se hagan bolillas",
+      "price": 40,
+      "sell": false,
+      "userId": 1,
+      "updatedAt": "2022-09-29T21:49:08.982Z",
+      "id": 3
+    },
+    {
+      "product": "bicileta",
+      "photo": "https://i.postimg.cc/vT2Cjxct/bici.jpg",
+      "description": "Bicicleta de montaña. Sólo usada dos veces. La segunda caída por un barranco.\nLa bicicleta está prácticamente nueva, salvo por las ruedas hechas un ocho y el cuadro partido",
+      "price": 125,
+      "sell": true,
+      "userId": 1,
+      "updatedAt": "2022-09-29T21:49:08.982Z",
+      "id": 2
+    },
+    {
+      "product": "televisor de 15\"",
+      "photo": "https://i.postimg.cc/d12y4GNg/televisor.jpg",
+      "description": "televisor de 15\" con TDT (todo el deporte tachado), 2 entradas HDMI (había dos mal indicadas) y mando a distancia (con palo selfie).\nMarca LJ (Lorenzo José). Seminuevo",
+      "price": 50,
+      "sell": true,
+      "userId": 1,
+      "updatedAt": "2022-09-29T21:50:20.963Z",
+      "id": 1
+    },
+    {
+      "product": "Ordeñador",
+      "description": "Por favor, no confundir con ordenador.\n\nSí, sí, es un ordeñador, para las vacas",
+      "photo": "",
+      "price": "550",
+      "sell": false,
+      "userId": 1,
+      "updatedAt": "2022-10-01T16:00:06.013Z",
+      "id": 4
+    },
+    {
+      "product": "Cargador móvil",
+      "description": "Busco un cargador móvil.\nMe refiero a uno que se mueva sólo.\nEstoy harto de tener que buscar el cargador.\nQuiero que le llame y venga por sí mismo",
+      "photo": "https://i.postimg.cc/v8KPJs0h/cargador-movil.jpg",
+      "price": 33.45,
+      "sell": false,
+      "userId": 1,
+      "updatedAt": "2022-10-01T16:09:55.061Z",
+      "id": 5
+    },
+    {
+      "product": "Absorbedor",
+      "description": "Vendo cosa que absorbe.\nAbsorbe la comida, absorbe el sueldo, absorbe la ropa...\ntodo.\n\nLo vendo muy barato, casi regalado.\nGracias",
+      "photo": "",
+      "price": 0.15,
+      "sell": true,
+      "userId": 2,
+      "updatedAt": "2022-10-01T16:13:39.828Z",
+      "id": 6
+    },
+    {
+      "product": "Uno y Uno",
+      "description": "Son dos",
+      "photo": "",
+      "price": 2,
+      "sell": true,
+      "userId": 2,
+      "updatedAt": "2022-10-01T20:18:45.511Z",
+      "id": 7
+    },
+    {
+      "product": "Periodico",
+      "description": "Periódico que contiene la noticia de mi nacimiento.\nPor si a alguien le hace ilusión",
+      "photo": "https://i.postimg.cc/gkYvtBWs/periodico.jpg",
+      "price": 25.5,
+      "sell": true,
+      "userId": 1,
+      "updatedAt": "2022-10-01T20:40:19.917Z",
+      "id": 8
+    },
+    {
+      "product": "Guía Telefónica",
+      "description": "Busco guía telefónica del año 1980, para buscar mi antiguo teléfono, que no me acuerdo el número",
+      "photo": "https://i.postimg.cc/pLskBM5K/guia-tel.jpg",
+      "price": 35,
+      "sell": false,
+      "userId": 1,
+      "updatedAt": "2022-10-01T20:44:29.279Z",
+      "id": 9
+    },
+    {
+      "product": "Agua",
+      "description": "Botella de...\nReferencias al tío perdido en el desierto",
+      "photo": "",
+      "price": 1,
+      "sell": true,
+      "userId": 1,
+      "updatedAt": "2022-10-02T15:20:23.993Z",
+      "id": 10
+    },
+    {
+      "product": "Teclado inverso",
+      "description": "Hola, soy zurdo y con los dedos al revés.\nBusco un teclado inverso que me facilite escribir en el ordenador.\nGracias",
+      "photo": "",
+      "price": 75.75,
+      "sell": false,
+      "userId": 1,
+      "updatedAt": "2022-10-02T15:51:20.225Z",
+      "id": 11
+    }
+  ],
+  "users": [
+    {
+      "username": "ivan1",
+      "password": "$2b$10$WPyji2DfbOSB9aDX7G46ce9omK0Jg0if6N0TGV7ykkc1ipEtI6bfO",
+      "id": 1
+    },
+    {
+      "username": "ivan2",
+      "password": "$2b$10$WPyji2DfbOSB9aDX7G46ce9omK0Jg0if6N0TGV7ykkc1ipEtI6bfO",
+      "id": 2
+    }
+  ]
+}
