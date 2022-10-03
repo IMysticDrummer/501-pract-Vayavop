@@ -11,7 +11,7 @@ export class Advertisement {
    * @param {string} product required
    * @param {string} description required
    * @param {float} price required
-   * @param {boolean} sell required
+   * @param {string} sell required. Values "selling" || "searching"
    * @param {string} photo optional
    * @return {Object} advertisement
    */
@@ -56,16 +56,16 @@ export class Advertisement {
     return numberData;
   };
 
-  validateBooleanData(booleanData, parameterName){
-    if (typeof booleanData !=='boolean') {
-      throw new Error(`${parameterName} must be a boolean`);
+  validateSellData(sellData, parameterName){
+    if (sellData !=='selling' && sellData !== 'searching') {
+      throw new Error(`${parameterName} must be "selling" or "searching"`);
     };
-    return booleanData;
+    return sellData==='selling' ? true : false;
   };
 
   setProduct(product) {
     try {
-      this.product=this.validateStringData(this.validateRequiredData(product, 'Product'));
+      this.product=this.validateStringData(this.validateRequiredData(product, 'Product'),'Product');
     } catch (error) {
       throw error;
     };
@@ -73,7 +73,7 @@ export class Advertisement {
 
   setDescription(description) {
     try {
-      this.description=this.validateStringData(this.validateRequiredData(description, 'Description'));
+      this.description=this.validateStringData(this.validateRequiredData(description, 'Description'),'Description');
     } catch (error) {
       throw error;
     };
@@ -81,7 +81,7 @@ export class Advertisement {
 
   setPrice(price) {
     try {
-      this.price=this.validateNumberData(this.validateRequiredData(price, 'Price'));
+      this.price=this.validateNumberData(this.validateRequiredData(price, 'Price'),'Price');
     } catch (error) {
       throw error;
     };
@@ -89,7 +89,7 @@ export class Advertisement {
 
   setSell(sell) {
     try {
-      this.sell=this.validateBooleanData(this.validateRequiredData(sell, 'Sell'));
+      this.sell=this.validateSellData(this.validateRequiredData(sell, 'Sell'),'Sell');
     } catch (error) {
       throw error;
     };

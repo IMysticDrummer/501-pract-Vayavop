@@ -29,7 +29,8 @@ Desde la página principal tenemos una pequeña navegación que nos permitirá:
 - *Si el usuario está loggeado*, permitirá crear un anuncio.
 
 ## Página de detalle del anuncio
-Mostrará un sólo anuncio, con todos los detalles del mismo.
+Mostrará un sólo anuncio, con todos los detalles del mismo.  
+Si el usuario está loggeado y el anuncio le pertenece, aparecerá el botón de eliminar anuncio.
 
 ## Página de registro / login
 *Notas de desarrollo*.  
@@ -51,44 +52,18 @@ Cuando se cree el usuario, automáticamente lo loggea y lo desvía a la página 
 - Logeará al ususario y le desviará a la página principal.
 
 ## Requisitos mínimos
-- Listado de anuncios
-  - Imagen
-  - Nombre
-  - Descripción (reducida)
-  - Precio
-  - Compra o venta
-  - Estados de interfaz
-    - Vacio
-    - Error
-    - Carga
-  - Enviar a detallas de anuncios al hacer click
 
-- Detalle de anuncio
-  - Si el producto es del dueño, y está loggeado debe mostrar botón que permita eliminar anuncio, con confirmación previa
-- Creación de anuncio
-  - Sólo si el usuario ha hecho login
-    - Foto (opcional) --> Subir archivo
-    - Nombre (obligatorio)
-    - Descripción (obligatorio)
-    - Precio (obligatorio)
-    - Compra/Venta (obligatorio)
-  - Enviará petición backend para la creación
-    - Mostrar estados del anuncio
-  - Si no estoy loggado me redirecciona al listado de productos (atrapar navegaciones url directamente a la paǵina de creación)
-- Login
-  - Formulario para Hacer el logeado
-  - Gestión de un token JWT
 - Registro
   - Formulario para registro
-    - Debe tener campo para la contraseña y la confirmación de la contraseña
+TODO    - Debe tener campo para la contraseña y la confirmación de la contraseña
 
 ## Requisitos opcionales
-- Gestionar la paginación (API entregará sólo 10 elementos)
-- Implementar un buscador de anuncios
-- Permitir editar un anuncio
-  - Sólo si el usuario es el dueño y está loggeado
-- Permitir el filtrado usando tags
-  - tags estáticos
-  - tags dinámicos
+TODO - Gestionar la paginación (API entregará sólo 10 elementos)
+TODO - Implementar un buscador de anuncios
+TODO - Permitir editar un anuncio
+TODO   - Sólo si el usuario es el dueño y está loggeado
+TODO - Permitir el filtrado usando tags
+TODO   - tags estáticos
+TODO   - tags dinámicos
 
-## API REST a utilizar en backend
+

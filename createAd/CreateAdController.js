@@ -33,7 +33,7 @@ export class CreateAdController {
         formData.get('articleInput'),
         formData.get('descriptionInput'),
         parseFloat(formData.get('priceInput')),
-        formData.get('selling')==="true",
+        formData.get('selling'),
         formData.get('photoInput')
       );
       
