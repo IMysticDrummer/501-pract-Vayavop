@@ -19,15 +19,25 @@ class APIConnector {
    */
   async get(endPoint) {
     let response;
+    let adsList;
     try {
       response=await fetch(`${this.baseURL}${endPoint}`,{method: 'GET'});
     } catch (error) {
-      throw new Error('Fail to get data');
+      throw new Error('URL Error. Revise the direction');
     };
 
-    if (!response.ok) {throw new Error('There\'s no advertisements')};
+    if (response.status===404) {
+      throw new Error(`Sorry... we can\'t find the page: ${this.baseURL}${endPoint}`);
+    }
 
-    return response.json();
+    if (!response.ok) {throw new Error('Sorry... we can\'t find advertisements')};
+
+    try {
+      adsList=await response.json();
+    } catch (error) {
+      throw new Error('Sorry. We have problems with data. Contact administrator');
+    }
+    return adsList;
   };
 
   /**

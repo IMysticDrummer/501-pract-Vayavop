@@ -1,6 +1,6 @@
 'use strict';
 
-import { getAds } from "./adsProvider.js";
+import { apiConnector } from "../apiConnector.js";
 import { adsListViewBuilder, adsNotFoundBuilder, spinnerBuild } from "./adsListView.js";
 import { pubSub } from "../pubSub.js";
 
@@ -16,7 +16,7 @@ export class AdsController {
     //getting advertisements and quit spinner
     let ads;
     try {
-      ads=await getAds();
+      ads=await apiConnector.get(apiConnector.endPoints.getAdsList);
     } catch (error) {
       //pubsub to notify
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, error);
