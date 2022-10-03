@@ -23,16 +23,18 @@ document.addEventListener('DOMContentLoaded', () => {
  * @returns string
  */
 function setTitlesAndFunction() {
-  const titlePage=document.querySelector('title');
   const titleHeader=document.querySelector('.titleHeader');
   const buttonSubmitForm=document.querySelector('.submit');
+  const loginLinkElement=document.querySelector('#login');
+  const signupLinkElement=document.querySelector('#sign');
   const params=new URLSearchParams(location.search);
   const typeFunction=params.get('type');
   let title;
 
-  typeFunction==="sign" ? title="SignUp" : title="Login";
+  typeFunction==='sign' ? title='SignUp' : title='Login';
   buttonSubmitForm.innerText=title;
-  titlePage.innerText=title+" Page";
-  titleHeader.innerHTML=title+" Page";
+  titleHeader.innerHTML='VayaPop: '+title+' Page';
+
+  typeFunction==='sign' ? signupLinkElement.parentElement.outerHTML='' : loginLinkElement.parentElement.outerHTML='';
   return typeFunction;
 };

@@ -44,6 +44,29 @@ h6 {
   font-size: 1.2em;
   margin: 0.67em 0;
 }
+
+input, textarea, fieldset{
+  margin: 5px;
+  color: blueviolet;
+  background-color: gold;
+  border: 1px blueviolet solid;
+}
+::placeholder{
+  color: blueviolet;
+}
+textarea{
+  min-width: 95%;
+}
+form{
+  width: 100%;
+}
+@media (min-width:768px) {
+  form{
+    width: 768px;
+    margin: 0 auto;
+  }
+}
+
 button{
   order:35;
   background-color: blue;
