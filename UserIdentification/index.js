@@ -27,14 +27,22 @@ function setTitlesAndFunction() {
   const buttonSubmitForm=document.querySelector('.submit');
   const loginLinkElement=document.querySelector('#login');
   const signupLinkElement=document.querySelector('#sign');
+  const confirmPassElement=document.querySelector('#confirmPassInputField');
   const params=new URLSearchParams(location.search);
   const typeFunction=params.get('type');
   let title;
+  
+  if (typeFunction==='sign') {
+    title='SignUp';
+    signupLinkElement.parentElement.outerHTML='';
+  } else {
+    title='Login';
+    loginLinkElement.parentElement.outerHTML='';
+    confirmPassElement.outerHTML='';
 
-  typeFunction==='sign' ? title='SignUp' : title='Login';
+  };
   buttonSubmitForm.innerText=title;
   titleHeader.innerHTML='VayaPop: '+title+' Page';
 
-  typeFunction==='sign' ? signupLinkElement.parentElement.outerHTML='' : loginLinkElement.parentElement.outerHTML='';
   return typeFunction;
 };

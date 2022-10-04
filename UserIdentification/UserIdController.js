@@ -11,6 +11,7 @@ export class UserIdController {
     this.nodeElement=nodeElement;
     this.signup=typeFunction==="sign";
     this.passwordInputFieldElement=this.nodeElement.querySelector('#passwordInputField');
+    this.confirmPassInputFieldElement=this.nodeElement.querySelector('#confirmPassInputField');
     this.userInputFieldElement=this.nodeElement.querySelector('#userInputField');
 
     pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW, '');
@@ -36,6 +37,7 @@ export class UserIdController {
       this.controlUserPasswordDifferents();
     } catch (error) {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,error);
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW, '');
       return;
     };
     this.createUser();
@@ -61,6 +63,10 @@ export class UserIdController {
 
     if (!regExp.test(this.passwordInputFieldElement.value)) {
       throw new Error(`Passwords must have only letters and numbers`);
+    };
+
+    if (this.passwordInputFieldElement.value!==this.confirmPassInputFieldElement.value) {
+      throw new Error(`Password and confirmation must be equals`);
     };
   };
 
