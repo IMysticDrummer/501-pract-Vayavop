@@ -22,6 +22,7 @@ export class AdsController {
 
   searchReset(){
     this.searchResetButton.addEventListener('click', ()=>{
+      //Show spinner
       pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
       this.parentNode.innerHTML='';
       this.searchElement.value='';
@@ -32,6 +33,7 @@ export class AdsController {
   searchEngine(){
     this.searchElement.addEventListener('input', ()=>{
       const searchConcept=this.searchElement.value;
+      //Show spinner
       pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
       this.parentNode.innerHTML='';
       this.loadAds(searchConcept);
@@ -50,6 +52,7 @@ export class AdsController {
       //pubsub to notify
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, error);
     }
+    //Hide spinner
     pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
 
     //Show results

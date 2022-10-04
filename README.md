@@ -26,7 +26,8 @@ Si pinchamos en los anuncios, nos llevará a una página de detalle, en la que m
 Desde la página principal tenemos una pequeña navegación que nos permitirá:
 - Ir a la página de registro (signup)
 - Ir a la página de login (login)
-- *Si el usuario está loggeado*, permitirá crear un anuncio.
+- *Si el usuario está loggeado*, permitirá crear un anuncio.  
+- Cuadro de búsqueda interactivo. Busca en el campo producto, que contenga el concepto tecleado en el campo búsqueda.
 
 ## Página de detalle del anuncio
 Mostrará un sólo anuncio, con todos los detalles del mismo.  
@@ -54,6 +55,7 @@ Cuando se cree el usuario, automáticamente lo loggea y lo desvía a la página 
 TODO - Sacar el control de password como un módulo aparte
 
 ## Requisitos opcionales
+DONE - Campo de búsqueda. Realizado con búsqueda directa según se escribe
 TODO - Gestionar la paginación (API entregará sólo 10 elementos)
 TODO - Permitir editar un anuncio
 TODO   - Sólo si el usuario es el dueño y está loggeado
