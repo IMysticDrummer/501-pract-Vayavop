@@ -13,6 +13,7 @@ header{
 #titleHeader{
   width: 100%;
   text-align: center;
+  font-size: 1.75em;
 }
 
 .navBarContainer{
@@ -27,6 +28,20 @@ header{
   color:orange;
   font-size: 1.1em;
 }
+.searchContainer{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content:left;
+  margin-top: 5px;
+}
+.searchField{
+  width: 100%;
+  margin: 0px;
+}
+.searchContainer>button{
+  margin:0;
+}
 
 @media (min-width:768px) {
   header{
@@ -37,9 +52,22 @@ header{
   #titleHeader{
     width: 70%;
     text-align: left;
+    font-size: 2em;
   }
   .navBarContainer{
     text-align: right;
+  }
+  .searchContainer{
+    width: 320px;
+    justify-content:flex-end;
+    margin-left: auto;
+  }
+  .searchField{
+    width: 60%;
+    height: 2em;
+  }
+  .searchContainer>button{
+    margin:0 5px;
   }
 }
 
