@@ -6,17 +6,46 @@ import { pubSub } from "../pubSub.js";
 
 export class AdsController {
 
-  constructor(parentNode) {
+  constructor(parentNode, searchContainer) {
     this.parentNode=parentNode;
+    this.searchContainer=searchContainer;
+    this.searchElement=searchContainer.querySelector('.searchField');
+    this.searchResetButton=searchContainer.querySelector('button');
+    this.subscribeToEvents();
     this.loadAds();
   };
 
-  async loadAds(){
+  subscribeToEvents(){
+    this.searchEngine();
+    this.searchReset();
+  };
+
+  searchReset(){
+    this.searchResetButton.addEventListener('click', ()=>{
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+      this.parentNode.innerHTML='';
+      this.searchElement.value='';
+      this.loadAds();
+    });
+  };
+
+  searchEngine(){
+    this.searchElement.addEventListener('input', ()=>{
+      const searchConcept=this.searchElement.value;
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+      this.parentNode.innerHTML='';
+      this.loadAds(searchConcept);
+    });
+  };
+
+  async loadAds(searchConcept){
 
     //getting advertisements and quit spinner
     let ads;
+    let endPoint=apiConnector.endPoints.getAdsList;
+    if (searchConcept) {endPoint+=`?product_like=${searchConcept}`};
     try {
-      ads=await apiConnector.get(apiConnector.endPoints.getAdsList);
+      ads=await apiConnector.get(endPoint);
     } catch (error) {
       //pubsub to notify
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, error);

@@ -51,15 +51,10 @@ Cuando se cree el usuario, automáticamente lo loggea y lo desvía a la página 
 - El botón de login se activará cuando se cumplan los dos primeros requisitos de la parte de registro.
 - Logeará al ususario y le desviará a la página principal.
 
-## Requisitos mínimos
-
-- Registro
-  - Formulario para registro
-TODO    - Debe tener campo para la contraseña y la confirmación de la contraseña
+TODO - Sacar el control de password como un módulo aparte
 
 ## Requisitos opcionales
 TODO - Gestionar la paginación (API entregará sólo 10 elementos)
-TODO - Implementar un buscador de anuncios
 TODO - Permitir editar un anuncio
 TODO   - Sólo si el usuario es el dueño y está loggeado
 TODO - Permitir el filtrado usando tags
