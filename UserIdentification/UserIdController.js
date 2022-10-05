@@ -2,7 +2,6 @@
 
 import { controlUserPasswordDifferents, passwordEqualConfim, passwordMinLength, validatePassword } from "../jsmodules/passwordVerify.js";
 import { pubSub } from "../pubSub.js";
-//import { createApiUser, loginApiUser } from "./userIdProvider.js";
 import { createApiUser, loginApiUser } from "/jsmodules/advertisementProvider.js";
 
 export class UserIdController {

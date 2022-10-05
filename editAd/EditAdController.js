@@ -1,6 +1,5 @@
 'use strict';
 
-//import { updateApiAd,getAdById } from "./editAdProvider.js";
 import { updateApiAd,getAdById } from "/jsmodules/advertisementProvider.js";
 import { pubSub } from "../pubSub.js";
 import { Advertisement } from "../Advertisement/Advertisement.js";

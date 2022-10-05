@@ -3,6 +3,21 @@
 import { apiConnector } from "../apiConnector.js";
 
 /**
+ * Ask API an advertisement list, and return it.
+ * Make filter if it's demanded.
+ * @param {integer} adId id of the advertisement
+ * @returns advertisement
+ */
+ export const getAdsList=async (searchConcept) => {
+
+  let endPoint=apiConnector.endPoints.getAdsList;
+  if (searchConcept) {endPoint+=`?product_like=${searchConcept}`};
+
+  return await apiConnector.get(endPoint);
+  
+};
+
+/**
  * Ask API an advertisement, and return it
  * @param {integer} adId id of the advertisement
  * @returns advertisement

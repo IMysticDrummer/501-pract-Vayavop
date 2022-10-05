@@ -1,8 +1,8 @@
 'use strict';
 
-import { apiConnector } from "../apiConnector.js";
 import { adsListViewBuilder, adsNotFoundBuilder } from "./adsListView.js";
 import { pubSub } from "../pubSub.js";
+import { getAdsList } from "../jsmodules/advertisementProvider.js";
 
 export class AdsController {
 
@@ -44,10 +44,8 @@ export class AdsController {
 
     //getting advertisements and quit spinner
     let ads;
-    let endPoint=apiConnector.endPoints.getAdsList;
-    if (searchConcept) {endPoint+=`?product_like=${searchConcept}`};
     try {
-      ads=await apiConnector.get(endPoint);
+      ads=await getAdsList(searchConcept);
     } catch (error) {
       //pubsub to notify
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, error);

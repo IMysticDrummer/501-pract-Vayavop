@@ -1,7 +1,6 @@
 'use strict';
 
 import { pubSub } from "../pubSub.js";
-//import { getAdById, deleteApiAdById } from "./adDetailProvider.js";
 import { getAdById, deleteApiAdById } from "/jsmodules/advertisementProvider.js";
 import { buildAdDetailView } from "./adDetailView.js";
 
