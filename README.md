@@ -31,7 +31,9 @@ Desde la página principal tenemos una pequeña navegación que nos permitirá:
 
 ## Página de detalle del anuncio
 Mostrará un sólo anuncio, con todos los detalles del mismo.  
-Si el usuario está loggeado y el anuncio le pertenece, aparecerá el botón de eliminar anuncio.
+Si el usuario está loggeado y el anuncio le pertenece, aparecerán:  
+- un botón para editar el anuncio  
+- un botón para eliminar anuncio.
 
 ## Página de registro / login
 *Notas de desarrollo*.  
