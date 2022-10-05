@@ -1,13 +1,12 @@
 'use strict';
 
+import { controlUserPasswordDifferents, passwordEqualConfim, passwordMinLength, validatePassword } from "../jsmodules/passwordVerify.js";
 import { pubSub } from "../pubSub.js";
 import { createApiUser, loginApiUser } from "./userIdProvider.js";
 
 export class UserIdController {
   constructor(nodeElement, typeFunction) {
-    this.config={
-      passwordMinLength: 6
-    };
+
     this.nodeElement=nodeElement;
     this.signup=typeFunction==="sign";
     this.passwordInputFieldElement=this.nodeElement.querySelector('#passwordInputField');
@@ -33,8 +32,12 @@ export class UserIdController {
   
   signupUser(){
     try {
-      this.validatePassword();
-      this.controlUserPasswordDifferents();
+      validatePassword(this.passwordInputFieldElement.value);
+      passwordEqualConfim(this.passwordInputFieldElement.value, this.confirmPassInputFieldElement.value);
+      controlUserPasswordDifferents(
+        this.passwordInputFieldElement.value,
+        this.userInputFieldElement.value
+      );
     } catch (error) {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,error);
       pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW, '');
@@ -42,43 +45,6 @@ export class UserIdController {
     };
     this.createUser();
   };
-
-  /**
-   * Password validation conditions
-   * - Password with 6 characters at least
-   * - Password must be letters (normal or capital) and/or numbers.
-   * 
-   * In other case, throw an error
-   */
-  validatePassword() {
-    //Password length. This would'nt be necessary because button is not going to
-    //be activated until the password field contains the minimun characters.
-    if (this.passwordInputFieldElement.value.length<this.config.passwordMinLength) {
-      throw new Error(`Password must be ${this.config.passwordMinLength}
-       characters long at least`);
-    }
-
-    //Passwords must have letters and numbers
-    const regExp = new RegExp(/^[a-zA-Z0-9]*$/);
-
-    if (!regExp.test(this.passwordInputFieldElement.value)) {
-      throw new Error(`Passwords must have only letters and numbers`);
-    };
-
-    if (this.passwordInputFieldElement.value!==this.confirmPassInputFieldElement.value) {
-      throw new Error(`Password and confirmation must be equals`);
-    };
-  };
-
-  /**
-   * Control password <> username
-   * Throw error if they are the same
-   */
-  controlUserPasswordDifferents() {
-    if (this.passwordInputFieldElement.value===this.userInputFieldElement.value) {
-      throw new Error('User and Password must be differents');
-    };
-  }
 
   /**
    * Submit button activate conditions:
@@ -93,7 +59,7 @@ export class UserIdController {
       inputFieldElement.addEventListener('input', () => {
         if (inputFieldElements.every(inputElement => inputElement.value)
           && this.passwordInputFieldElement.value.length>=
-          this.config.passwordMinLength
+          passwordMinLength()
         ) {
           buttonSubmitForm.removeAttribute('disabled');
         } else {

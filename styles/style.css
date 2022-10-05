@@ -81,7 +81,7 @@ button:hover{
   color: orange;
 }
 button:disabled{
-  background-color: grey;
+  background-color: lightgrey;
   color: azure;
 }
 
