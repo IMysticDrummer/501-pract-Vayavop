@@ -1,7 +1,7 @@
 'use strict';
 
 import { apiConnector } from "../apiConnector.js";
-import { adsListViewBuilder, adsNotFoundBuilder, spinnerBuild } from "./adsListView.js";
+import { adsListViewBuilder, adsNotFoundBuilder } from "./adsListView.js";
 import { pubSub } from "../pubSub.js";
 
 export class AdsController {
