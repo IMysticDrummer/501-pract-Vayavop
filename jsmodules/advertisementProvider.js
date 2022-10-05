@@ -1,11 +1,11 @@
 'use strict';
 
-import { apiConnector } from "../apiConnector.js";
+import { apiConnector } from "/jsmodules/apiConnector.js";
 
 /**
  * Ask API an advertisement list, and return it.
  * Make filter if it's demanded.
- * @param {integer} adId id of the advertisement
+ * @param {string} searchConcept string containing searching pattern
  * @returns advertisement
  */
  export const getAdsList=async (searchConcept) => {
