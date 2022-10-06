@@ -37,7 +37,12 @@ class APIConnector {
     } catch (error) {
       throw new Error('Sorry. We have problems with data. Contact administrator');
     }
-    return adsList;
+  
+    const responseObjet={
+      data:adsList,
+      links:response.headers.get('link')
+    }
+    return responseObjet;
   };
 
   /**

@@ -48,3 +48,20 @@ export function spinnerBuild(){
 
   return spinner;
 };
+
+export function paginationBuild(links){
+  let pagination=``;
+  pagination+=`<a class="first"
+   href="/index.html?_page=${links.first}">
+    first 
+   </a>`;
+  if(links.prev) {
+    pagination+=`<a class="prev href="/index.html?_page=${links.prev}"> prev </a>`;
+  };
+  if(links.next) {
+    pagination+=`<a class="next" href="/index.html?_page=${links.next}"> next </a>`;
+  };
+  pagination+=`<a class="last" href="/index.html?_page=${links.last}"> last </a>`;
+
+  return pagination;
+};

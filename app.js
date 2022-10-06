@@ -8,10 +8,14 @@ document.addEventListener('DOMContentLoaded',()=>{
   const spinnerContainer=document.querySelector('.spinnerContainer');
   const spinner=new Spinner(spinnerContainer);
 
+  const params=new URLSearchParams(location.search);
+  const page=params.get('_page') || 1;
+
   const advertisements=new AdsController(
     document.querySelector('#advertisements'),
-    document.querySelector('.searchContainer')
-    );
+    document.querySelector('.searchContainer'),
+    page
+  );
 
   const notificationElement=new NotificationController(document.querySelector("#notification"));
   

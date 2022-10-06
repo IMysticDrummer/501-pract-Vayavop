@@ -59,8 +59,8 @@ TODO - Sacar el control de password como un módulo aparte
 ## Requisitos opcionales
 DONE - Campo de búsqueda. Realizado con búsqueda directa según se escribe
 TODO - Gestionar la paginación (API entregará sólo 10 elementos)
-TODO - Permitir editar un anuncio
-TODO   - Sólo si el usuario es el dueño y está loggeado
+DONE - Permitir editar un anuncio
+DONE   - Sólo si el usuario es el dueño y está loggeado
 TODO - Permitir el filtrado usando tags
 TODO   - tags estáticos
 TODO   - tags dinámicos

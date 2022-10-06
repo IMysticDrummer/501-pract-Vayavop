@@ -3,18 +3,19 @@
 import { apiConnector } from "/jsmodules/apiConnector.js";
 
 /**
- * Ask API an advertisement list, and return it.
+ * Ask API an advertisement paged list, and return it.
  * Make filter if it's demanded.
  * @param {string} searchConcept string containing searching pattern
- * @returns advertisement
+ * @returns advertisementList
  */
- export const getAdsList=async (searchConcept) => {
+ export const getAdsList=async (searchConcept, page) => {
 
-  let endPoint=apiConnector.endPoints.getAdsList;
-  if (searchConcept) {endPoint+=`?product_like=${searchConcept}`};
+  if (searchConcept) page=1;
+  let endPoint=apiConnector.endPoints.getAdsList+`?_page=${page || 1}`;
+  if (searchConcept) {endPoint+=`&product_like=${searchConcept}`};
 
-  return await apiConnector.get(endPoint);
-  
+  const response=await apiConnector.get(endPoint);
+  return response;
 };
 
 /**

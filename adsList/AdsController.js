@@ -1,16 +1,17 @@
 'use strict';
 
-import { adsListViewBuilder, adsNotFoundBuilder } from "./adsListView.js";
+import { adsListViewBuilder, adsNotFoundBuilder, paginationBuild } from "./adsListView.js";
 import { pubSub } from "../pubSub.js";
 import { getAdsList } from "../jsmodules/advertisementProvider.js";
 
 export class AdsController {
 
-  constructor(parentNode, searchContainer) {
+  constructor(parentNode, searchContainer, page) {
     this.parentNode=parentNode;
     this.searchContainer=searchContainer;
     this.searchElement=searchContainer.querySelector('.searchField');
     this.searchResetButton=searchContainer.querySelector('button');
+    this.page=page;
     this.subscribeToEvents();
     this.loadAds();
   };
@@ -40,12 +41,30 @@ export class AdsController {
     });
   };
 
+  extractLinks(links){
+    const linksArray=links.split(',');
+    let linkParts={};
+    linksArray.forEach(linkElement => {
+      const parts=linkElement.split(';');
+      const linkObject={};
+      const equalIndex=parts[0].trim().lastIndexOf('=');
+      const pageNumber=parts[0].trim().slice(equalIndex+1,parts[0].trim().length-1);
+      linkParts[parts[1].trim().slice(5,parts[1].trim().length-1)]=pageNumber;
+    });
+    return linkParts;
+  };
+
   async loadAds(searchConcept){
 
     //getting advertisements and quit spinner
     let ads;
+    let links;
     try {
-      ads=await getAdsList(searchConcept);
+      ads=await getAdsList(searchConcept, this.page);
+      if (ads.links) {
+        links=this.extractLinks(ads.links);
+      };
+      ads=ads.data;
     } catch (error) {
       //pubsub to notify
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, error);
@@ -55,7 +74,10 @@ export class AdsController {
 
     //Show results
     if (!ads) {this.showAdsNotFound();};
-    if (ads) {this.drawAds(ads);};
+    if (ads) {
+      if (links) {this.drawPagination(links);};
+      this.drawAds(ads);
+    };
   };
   
   /**
@@ -84,6 +106,14 @@ export class AdsController {
       //Append the container to the parent node
       this.parentNode.appendChild(childElement);
     }
+  };
+
+  drawPagination(links){
+    const childElement=document.createElement('div');
+    childElement.classList.add('pagination');
+    const pagination=paginationBuild(links);
+    childElement.innerHTML=pagination;
+    this.parentNode.appendChild(childElement);
   };
 
 };
