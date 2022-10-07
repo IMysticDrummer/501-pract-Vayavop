@@ -22,7 +22,8 @@ export class AdDetailController {
   async showAd(adId){
     let ad;
     try {
-      ad=await getAdById(adId);
+      const adObject=await getAdById(adId);
+      ad=adObject.data;
     } catch (error) {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, "Advertisement doesn't exist");
       return;

@@ -60,11 +60,11 @@ export class AdsController {
     let ads;
     let links;
     try {
-      ads=await getAdsList(searchConcept, this.page);
-      if (ads.links) {
-        links=this.extractLinks(ads.links);
+      const adsObject=await getAdsList(searchConcept, this.page);
+      if (adsObject.links) {
+        links=this.extractLinks(adsObject.links);
       };
-      ads=ads.data;
+      ads=adsObject.data;
     } catch (error) {
       //pubsub to notify
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, error);
