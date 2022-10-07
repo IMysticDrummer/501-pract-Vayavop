@@ -5,7 +5,7 @@ export class Advertisement {
   /**
    * Create a new advertisement.
    * The constructor receive and validate the data.
-   * This class provide the methods necessary methods to
+   * This class provide the necessary methods to
    * change and validate any of the attributes after the
    * creation 
    * @param {string} product required
@@ -35,6 +35,12 @@ export class Advertisement {
 
   };
 
+  /**
+   * Return an error if the required data is not provided
+   * @param {any of advertisement data} data 
+   * @param {string} parameterName 
+   * @returns 
+   */
   validateRequiredData(data, parameterName){
     if (!data) {
       throw new Error(`${parameterName} is required`);
@@ -42,6 +48,12 @@ export class Advertisement {
     return data;
   };
 
+  /**
+   * Return an error if the data is not a string
+   * @param {string} stringData data to test
+   * @param {string} parameterName 
+   * @returns 
+   */
   validateStringData(stringData, parameterName){
     if (typeof stringData !=='string') {
       throw new Error(`${parameterName} must be a string`);
@@ -49,6 +61,12 @@ export class Advertisement {
     return stringData;
   };
 
+  /**
+   * Return an error if the data is not a number
+   * @param {number} numberData 
+   * @param {string} parameterName 
+   * @returns 
+   */
   validateNumberData(numberData, parameterName){
     if (typeof numberData !=='number') {
       throw new Error(`${parameterName} must be a number`);
@@ -56,6 +74,15 @@ export class Advertisement {
     return numberData;
   };
 
+  /**
+   * Recives an valid string for the sell attibute.
+   * Returns:
+   *  - sellData==='selling' => true
+   *  - false in other cases
+   * @param {string} sellData selling || searching
+   * @param {*} parameterName 
+   * @returns 
+   */
   validateSellData(sellData, parameterName){
     if (sellData !=='selling' && sellData !== 'searching') {
       throw new Error(`${parameterName} must be "selling" or "searching"`);
@@ -63,6 +90,10 @@ export class Advertisement {
     return sellData==='selling' ? true : false;
   };
 
+  /**
+   * Set the product attribute, after testing the data
+   * @param {string} product 
+   */
   setProduct(product) {
     try {
       this.product=this.validateStringData(this.validateRequiredData(product, 'Product'),'Product');
@@ -71,6 +102,10 @@ export class Advertisement {
     };
   };
 
+  /**
+   * Set the description attribute, after testing the data
+   * @param {string} product 
+   */
   setDescription(description) {
     try {
       this.description=this.validateStringData(this.validateRequiredData(description, 'Description'),'Description');
@@ -79,6 +114,10 @@ export class Advertisement {
     };
   };
 
+  /**
+   * Set the price attribute, after testing the data
+   * @param {number} product 
+   */
   setPrice(price) {
     try {
       this.price=this.validateNumberData(this.validateRequiredData(price, 'Price'),'Price');
@@ -87,6 +126,10 @@ export class Advertisement {
     };
   };
 
+  /**
+   * Set the sell attribute, after testing the data
+   * @param {string} product 
+   */
   setSell(sell) {
     try {
       this.sell=this.validateSellData(this.validateRequiredData(sell, 'Sell'),'Sell');
@@ -95,6 +138,11 @@ export class Advertisement {
     };
   };
 
+  /**
+   * Set the photo. attribute, after testing the data.
+   * To show the photo, *product* must be an accesible URL
+   * @param {string} product 
+   */
   setPhoto(photo) {
     try {
       this.photo=this.validateStringData(photo, 'Photo');

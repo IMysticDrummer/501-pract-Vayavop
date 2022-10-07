@@ -1,7 +1,7 @@
 'use strict';
 
 import { controlUserPasswordDifferents, passwordEqualConfim, passwordMinLength, validatePassword } from "../jsmodules/passwordVerify.js";
-import { pubSub } from "../pubSub.js";
+import { pubSub } from "../jsmodules/pubSub.js";
 import { createApiUser, loginApiUser } from "/jsmodules/advertisementProvider.js";
 
 export class UserIdController {
@@ -13,7 +13,7 @@ export class UserIdController {
     this.confirmPassInputFieldElement=this.nodeElement.querySelector('#confirmPassInputField');
     this.userInputFieldElement=this.nodeElement.querySelector('#userInputField');
 
-    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW, '');
+    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE, '');
     this.subscribeToEvents();
 
   };
@@ -21,7 +21,7 @@ export class UserIdController {
   subscribeToEvents() {
     this.nodeElement.addEventListener('submit', async (event) => {
       event.preventDefault();
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW, '');
+      pubSub.publish(pubSub.TOPICS.SPINNER_SHOW, '');
 
       this.signup ? this.signupUser() : this.loginUser();
     });
@@ -29,7 +29,10 @@ export class UserIdController {
     this.activateSubmitButton();
   };
   
-  
+  /**
+   * Validate the user and password conditions and call to create user
+   * @returns 
+   */
   signupUser(){
     try {
       validatePassword(this.passwordInputFieldElement.value);
@@ -40,7 +43,7 @@ export class UserIdController {
       );
     } catch (error) {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,error);
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW, '');
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE, '');
       return;
     };
     this.createUser();
@@ -80,7 +83,7 @@ export class UserIdController {
     } catch (error) {
       const message=`Problem with user creation. Try another username`;
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,`Problem with user creation. Try another username`);
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW, '');
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE, '');
     }
     
   };
@@ -96,7 +99,7 @@ export class UserIdController {
       setTimeout(()=>{window.location='/'},1500);
     } catch (error) {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR,`Impossible to loggin. Check your credentials`);
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW, '');
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE, '');
     }
   };
 };

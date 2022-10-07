@@ -2,7 +2,7 @@
 
 import { CreateAdController } from "./CreateAdController.js";
 import { NotificationController } from "../NotificationControler/NotificationController.js";
-import { pubSub } from "../pubSub.js";
+import { pubSub } from "../jsmodules/pubSub.js";
 import { Spinner } from "/Spinner/Spinner.js";
 
 document.addEventListener('DOMContentLoaded', async () => {

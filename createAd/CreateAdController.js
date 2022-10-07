@@ -1,7 +1,7 @@
 'use strict';
 
 import { createApiAd } from "/jsmodules/advertisementProvider.js";
-import { pubSub } from "../pubSub.js";
+import { pubSub } from "../jsmodules/pubSub.js";
 import { Advertisement } from "../Advertisement/Advertisement.js";
 
 export class CreateAdController {
@@ -16,15 +16,21 @@ export class CreateAdController {
   };
 
   subscribeToEvents(){
-    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE,'');
+    
     this.createAdFormElement.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+      pubSub.publish(pubSub.TOPICS.SPINNER_SHOW,'');
       this.createAdvertisement();
     });
   };
 
+  /**
+   * Ask the advertisement creation.
+   * Return error if it's not possible
+   * @returns 
+   */
   async createAdvertisement() {
     const formData = new FormData(this.createAdFormElement);
     let adObject;
@@ -39,7 +45,7 @@ export class CreateAdController {
       
     } catch (error) {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, `Error de datos-> ${error}`);
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE,'');
       return;
     }
 

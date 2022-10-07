@@ -1,7 +1,7 @@
 'use strict';
 
 import { adsListViewBuilder, adsNotFoundBuilder, paginationBuild } from "./adsListView.js";
-import { pubSub } from "../pubSub.js";
+import { pubSub } from "../jsmodules/pubSub.js";
 import { getAdsList } from "../jsmodules/advertisementProvider.js";
 
 export class AdsController {
@@ -23,10 +23,14 @@ export class AdsController {
     this.searchReset();
   };
 
+  /**
+   * Configure the search reset button to erase automatically the
+   * advertisements filter
+   */
   searchReset(){
     this.searchResetButton.addEventListener('click', ()=>{
       //Show spinner
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+      pubSub.publish(pubSub.TOPICS.SPINNER_SHOW,'');
       this.parentNode.innerHTML='';
       this.searchElement.value='';
       this.page=1;
@@ -34,17 +38,27 @@ export class AdsController {
     });
   };
 
+  /**
+   * Configure the search field, to launch automatically the
+   * filtered advertisements request
+   */
   searchEngine(){
     this.searchElement.addEventListener('input', ()=>{
       this.searchConcept=this.searchElement.value;
       this.page=1;
       //Show spinner
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+      pubSub.publish(pubSub.TOPICS.SPINNER_SHOW,'');
       this.parentNode.innerHTML='';
       this.loadAds();
     });
   };
 
+  /**
+   * This function returns an object containing the keys to make the pagination (first, prev, next, last),
+   * which cotains the page number, to make the request.
+   * @param {string} links containing the pagination links response from advertisement provider
+   * @returns Object{link-key: page number to request}
+   */
   extractLinks(links){
     const linksArray=links.split(',');
     let linkParts={};
@@ -58,8 +72,10 @@ export class AdsController {
     return linkParts;
   };
 
+  /**
+   * Load the advertisements
+   */
   async loadAds(){
-
     //getting advertisements and quit spinner
     let ads;
     let links;
@@ -74,7 +90,7 @@ export class AdsController {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, error);
     }
     //Hide spinner
-    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE,'');
 
     //Show results
     if (!ads) {this.showAdsNotFound();};
@@ -82,7 +98,6 @@ export class AdsController {
       if (links) {
         this.drawPagination(links);
         this.configPagination(links);
-
       };
       this.drawAds(ads);
     };
@@ -116,57 +131,55 @@ export class AdsController {
     }
   };
 
-  drawPagination(links){
+  /**
+   * Draw the pagination buttons
+   */
+  drawPagination(){
     const childElement=document.createElement('div');
     childElement.classList.add('pagination');
-    const pagination=paginationBuild(links);
+    const pagination=paginationBuild();
     childElement.innerHTML=pagination;
     this.parentNode.appendChild(childElement);
   };
 
+  /**
+   * Configure the pagination buttons. Use the 'id' html attribute to keep the page name related to the button.
+   * For example... ```<button class="first" id="1">... ```
+   * @param {Object} links containing the page number for each key (first, prev, next, last)
+   */
   configPagination(links){
     const paginationElement=this.parentNode.querySelector('.pagination');
-    const buttonFirstElement=paginationElement.querySelector('.first');
-    buttonFirstElement.setAttribute('id', links.first);
-    const buttonLastElement=paginationElement.querySelector('.last');
-    buttonLastElement.setAttribute('id', links.last);
-    const buttonPrevElement=paginationElement.querySelector('.prev');
-    const buttonNextElement=paginationElement.querySelector('.next');
 
-    if (!links.hasOwnProperty('prev')) {
-      buttonPrevElement.setAttribute('disabled','');
-    } else {
-      buttonPrevElement.setAttribute('id', links.prev);
-    };
-    if (!links.hasOwnProperty('next')) {
-      buttonNextElement.setAttribute('disabled','');
-    } else {
-      buttonNextElement.setAttribute('id', links.next);
-    };
+    const buttonList=paginationElement.querySelectorAll('button');
 
-    buttonFirstElement.addEventListener('click', ()=>{
-      this.page=buttonFirstElement.getAttribute('id');
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
-      this.parentNode.innerHTML='';
-      this.loadAds();
-    });
-    buttonPrevElement.addEventListener('click', ()=>{
-      this.page=buttonPrevElement.getAttribute('id');
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
-      this.parentNode.innerHTML='';
-      this.loadAds();
-    });
-    buttonNextElement.addEventListener('click', ()=>{
-      this.page=buttonNextElement.getAttribute('id');
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
-      this.parentNode.innerHTML='';
-      this.loadAds();
-    });
-    buttonLastElement.addEventListener('click', ()=>{
-      this.page=buttonLastElement.getAttribute('id');
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
-      this.parentNode.innerHTML='';
-      this.loadAds();
+    buttonList.forEach((button)=>{
+      if (button.classList.contains('first')) {
+        button.setAttribute('id', links.first);
+      };
+      if (button.classList.contains('last')) {
+        button.setAttribute('id', links.last);
+      };
+      if (button.classList.contains('prev')) {
+        if (!links.hasOwnProperty('prev')) {
+          button.setAttribute('disabled','');
+        } else {
+          button.setAttribute('id', links.prev);
+        };
+      };
+      if (button.classList.contains('next')) {
+        if (!links.hasOwnProperty('next')) {
+          button.setAttribute('disabled','');
+        } else {
+          button.setAttribute('id', links.next);
+        };
+      };
+
+      button.addEventListener('click', ()=>{
+        this.page=button.getAttribute('id');
+        pubSub.publish(pubSub.TOPICS.SPINNER_SHOW,'');
+        this.parentNode.innerHTML='';
+        this.loadAds();
+      });
     });
   }
 };

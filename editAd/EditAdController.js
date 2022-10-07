@@ -1,8 +1,9 @@
 'use strict';
 
 import { updateApiAd,getAdById } from "/jsmodules/advertisementProvider.js";
-import { pubSub } from "../pubSub.js";
+import { pubSub } from "../jsmodules/pubSub.js";
 import { Advertisement } from "../Advertisement/Advertisement.js";
+import { controlLoggedOwner } from "../jsmodules/controlLoggedOwner.js";
 
 export class EditAdController {
   /**
@@ -22,7 +23,7 @@ export class EditAdController {
    * @param {Advertisement objetc} adId 
   */
   async showAd(adId){
-    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+    pubSub.publish(pubSub.TOPICS.SPINNER_SHOW,'');
 
     this.adId=adId;
     let ad;
@@ -35,7 +36,7 @@ export class EditAdController {
     };
 
 
-    if (!this.controlLoggedOwner(ad)) {
+    if (!controlLoggedOwner(ad)) {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, "You are not the owner of this adevertisement");
       setTimeout(()=>{window.location='/';},1000);
       return;
@@ -43,9 +44,13 @@ export class EditAdController {
 
     this.fillEditForm(ad);
     
-    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE,'');
   };
 
+  /**
+   * Fill the edit form field with the advertisement data
+   * @param {Advertisement expanded} ad 
+   */
   fillEditForm(ad){
     const articleInput=this.editAdFormElement.querySelector('#articleInput');
     const descriptionInput=this.editAdFormElement.querySelector('.descriptionInput');
@@ -65,25 +70,19 @@ export class EditAdController {
     };
   };
 
-  controlLoggedOwner(ad){
-    const logged=localStorage.getItem('token');
-    const jwt=logged.split('.')[1];
-    const jwtDecoded=JSON.parse(window.atob(jwt));
-    const userJwtId=jwtDecoded.userId;
-    if (userJwtId===ad.userId) {return true;};
-    return false;
-  };
-
   subscribeToEvents(){
-    pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
     this.editAdFormElement.addEventListener('submit', (event) => {
       event.preventDefault();
 
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+      pubSub.publish(pubSub.TOPICS.SPINNER_SHOW,'');
       this.editAdvertisement();
     });
   };
 
+  /**
+   * Request the advertisement update. Returns an error if it's not possible
+   * @returns 
+   */
   async editAdvertisement() {
     const formData = new FormData(this.editAdFormElement);
     let adObject;
@@ -98,7 +97,7 @@ export class EditAdController {
       
     } catch (error) {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, `Error de datos-> ${error}`);
-      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE,'');
       return;
     }
 

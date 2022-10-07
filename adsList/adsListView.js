@@ -34,40 +34,9 @@ export function adsNotFoundBuilder(){
 
 /**
  * 
- * @returns string html formmated to manage a spinner
+ * @returns string containing html buttons, class names first, prev, next and last, to prepare paginations
  */
-export function spinnerBuild(){
-  let spinner=`
-    <div class="spinner">
-      <div></div>
-      <div></div><div></div><div></div>
-      <div></div><div></div><div></div>
-      <div></div>
-    </div>
-  `;
-
-  return spinner;
-};
-/*
-export function paginationBuild(links){
-  let pagination=``;
-  pagination+=`<a class="first"
-   href="/index.html?_page=${links.first}">
-    first 
-   </a>`;
-  if(links.prev) {
-    pagination+=`<a class="prev href="/index.html?_page=${links.prev}"> prev </a>`;
-  };
-  if(links.next) {
-    pagination+=`<a class="next" href="/index.html?_page=${links.next}"> next </a>`;
-  };
-  pagination+=`<a class="last" href="/index.html?_page=${links.last}"> last </a>`;
-
-  return pagination;
-};
-*/
-
-export function paginationBuild(links){
+export function paginationBuild(){
   const pagination=`
     <button class="first"> first </button>
     <button class="prev"> prev </button>

@@ -1,6 +1,6 @@
 'use strict';
 
-import { pubSub } from "../pubSub.js";
+import { pubSub } from "../jsmodules/pubSub.js";
 import { buildNotificationView } from "./notification-view.js";
 
 /**
