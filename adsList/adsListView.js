@@ -48,7 +48,7 @@ export function spinnerBuild(){
 
   return spinner;
 };
-
+/*
 export function paginationBuild(links){
   let pagination=``;
   pagination+=`<a class="first"
@@ -62,6 +62,18 @@ export function paginationBuild(links){
     pagination+=`<a class="next" href="/index.html?_page=${links.next}"> next </a>`;
   };
   pagination+=`<a class="last" href="/index.html?_page=${links.last}"> last </a>`;
+
+  return pagination;
+};
+*/
+
+export function paginationBuild(links){
+  const pagination=`
+    <button class="first"> first </button>
+    <button class="prev"> prev </button>
+    <button class="next"> next </button>
+    <button class="last"> last </button>
+  `;
 
   return pagination;
 };

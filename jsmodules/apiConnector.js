@@ -15,7 +15,7 @@ class APIConnector {
    * - list of advertisements
    * - one advertisement (/advertisement/<id>)
    * @param {apiConnector.endPoint} endPoint 
-   * @returns 
+   * @returns Object{data: ads in json, links: string containin pagination links}
    */
   async get(endPoint) {
     let response;

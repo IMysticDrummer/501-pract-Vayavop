@@ -6,13 +6,15 @@ import { apiConnector } from "/jsmodules/apiConnector.js";
  * Ask API an advertisement paged list, and return it.
  * Make filter if it's demanded.
  * @param {string} searchConcept string containing searching pattern
- * @returns advertisementList
+ * @returns Object {data: array of ads, links: string of pagination links}
  */
  export const getAdsList=async (searchConcept, page) => {
-
-  if (searchConcept) page=1;
-  let endPoint=apiConnector.endPoints.getAdsList+`?_page=${page || 1}`;
-  if (searchConcept) {endPoint+=`&product_like=${searchConcept}`};
+  let endPoint=apiConnector.endPoints.getAdsList;
+  if (searchConcept) {
+    endPoint+=`?product_like=${searchConcept}&_page=${page || 1}`;
+  } else {
+    endPoint+=`?_page=${page || 1}`;
+  }
 
   const response=await apiConnector.get(endPoint);
   return response;
@@ -21,7 +23,7 @@ import { apiConnector } from "/jsmodules/apiConnector.js";
 /**
  * Ask API an advertisement, and return it
  * @param {integer} adId id of the advertisement
- * @returns advertisement
+ * @returns Object {data: advertisement expanded, links: string of pagination links}
  */
 export const getAdById=async (adId) => {
   return await apiConnector.get(`${apiConnector.endPoints.getAdsList}/${adId}?_expand=user`);

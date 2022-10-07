@@ -27,7 +27,8 @@ export class EditAdController {
     this.adId=adId;
     let ad;
     try {
-      ad=await getAdById(adId);
+      const adObjet=await getAdById(adId);
+      ad=adObjet.data;
     } catch (error) {
       pubSub.publish(pubSub.TOPICS.NOTIFICATION_ERROR, "Advertisement doesn't exist");
       return;

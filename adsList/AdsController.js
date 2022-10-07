@@ -6,12 +6,14 @@ import { getAdsList } from "../jsmodules/advertisementProvider.js";
 
 export class AdsController {
 
-  constructor(parentNode, searchContainer, page) {
+  constructor(parentNode, searchContainer) {
     this.parentNode=parentNode;
     this.searchContainer=searchContainer;
     this.searchElement=searchContainer.querySelector('.searchField');
     this.searchResetButton=searchContainer.querySelector('button');
-    this.page=page;
+    this.searchConcept='';
+    this.page=1;
+
     this.subscribeToEvents();
     this.loadAds();
   };
@@ -27,17 +29,19 @@ export class AdsController {
       pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
       this.parentNode.innerHTML='';
       this.searchElement.value='';
+      this.page=1;
       this.loadAds();
     });
   };
 
   searchEngine(){
     this.searchElement.addEventListener('input', ()=>{
-      const searchConcept=this.searchElement.value;
+      this.searchConcept=this.searchElement.value;
+      this.page=1;
       //Show spinner
       pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
       this.parentNode.innerHTML='';
-      this.loadAds(searchConcept);
+      this.loadAds();
     });
   };
 
@@ -54,13 +58,13 @@ export class AdsController {
     return linkParts;
   };
 
-  async loadAds(searchConcept){
+  async loadAds(){
 
     //getting advertisements and quit spinner
     let ads;
     let links;
     try {
-      const adsObject=await getAdsList(searchConcept, this.page);
+      const adsObject=await getAdsList(this.searchConcept, this.page);
       if (adsObject.links) {
         links=this.extractLinks(adsObject.links);
       };
@@ -75,7 +79,11 @@ export class AdsController {
     //Show results
     if (!ads) {this.showAdsNotFound();};
     if (ads) {
-      if (links) {this.drawPagination(links);};
+      if (links) {
+        this.drawPagination(links);
+        this.configPagination(links);
+
+      };
       this.drawAds(ads);
     };
   };
@@ -116,5 +124,50 @@ export class AdsController {
     this.parentNode.appendChild(childElement);
   };
 
+  configPagination(links){
+    const paginationElement=this.parentNode.querySelector('.pagination');
+    const buttonFirstElement=paginationElement.querySelector('.first');
+    buttonFirstElement.setAttribute('id', links.first);
+    const buttonLastElement=paginationElement.querySelector('.last');
+    buttonLastElement.setAttribute('id', links.last);
+    const buttonPrevElement=paginationElement.querySelector('.prev');
+    const buttonNextElement=paginationElement.querySelector('.next');
+
+    if (!links.hasOwnProperty('prev')) {
+      buttonPrevElement.setAttribute('disabled','');
+    } else {
+      buttonPrevElement.setAttribute('id', links.prev);
+    };
+    if (!links.hasOwnProperty('next')) {
+      buttonNextElement.setAttribute('disabled','');
+    } else {
+      buttonNextElement.setAttribute('id', links.next);
+    };
+
+    buttonFirstElement.addEventListener('click', ()=>{
+      this.page=buttonFirstElement.getAttribute('id');
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+      this.parentNode.innerHTML='';
+      this.loadAds();
+    });
+    buttonPrevElement.addEventListener('click', ()=>{
+      this.page=buttonPrevElement.getAttribute('id');
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+      this.parentNode.innerHTML='';
+      this.loadAds();
+    });
+    buttonNextElement.addEventListener('click', ()=>{
+      this.page=buttonNextElement.getAttribute('id');
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+      this.parentNode.innerHTML='';
+      this.loadAds();
+    });
+    buttonLastElement.addEventListener('click', ()=>{
+      this.page=buttonLastElement.getAttribute('id');
+      pubSub.publish(pubSub.TOPICS.SPINNER_HIDE_SHOW,'');
+      this.parentNode.innerHTML='';
+      this.loadAds();
+    });
+  }
 };
 
